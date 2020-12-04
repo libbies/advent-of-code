@@ -4,5 +4,5 @@ print(len([
         for line in [*map(str.split, open("input.txt").read().split('\n\n'))]
     ]
     if len(p)>=7
-    if not(len(p)<8 and "cid" in p)
+    if len(p)>=8 or "cid" not in p
 ]))
