@@ -1,6 +1,6 @@
 print(len([
     p for p in [
-        {l.split(':')[0]: l.split(':')[1]  for l in line}
+        {l.split(':')[0]: l.split(':')[1] for l in line}
         for line in [*map(str.split, open("input.txt").read().split('\n\n'))]
     ]
     if len(p)>=7
@@ -11,7 +11,6 @@ print(len([
     if p["hgt"].endswith("cm") or p["hgt"].endswith("in")
     if not(p["hgt"].endswith("cm") and not 150 <= int(p["hgt"][:-2]) <= 193)
     if not(p["hgt"].endswith("in") and not 59 <= int(p["hgt"][:-2]) <= 76)
-    if len(p["hcl"])==7
     if p["hcl"].startswith("#")
     if len([*filter(lambda c: c in "0123456789abcdef", p["hcl"][1:])])==6
     if p["ecl"] in ["amb","blu","brn","gry","grn","hzl","oth"]
