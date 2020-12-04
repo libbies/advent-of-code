@@ -4,7 +4,7 @@ print(len([
         for line in [*map(str.split, open("input.txt").read().split('\n\n'))]
     ]
     if len(p)>=7
-    if not(len(p)<8 and "cid" in p)
+    if len(p)>=8 or "cid" not in p
     if 1920 <= int(p["byr"]) <= 2002
     if 2010 <= int(p["iyr"]) <= 2020
     if 2020 <= int(p["eyr"]) <= 2030
@@ -14,7 +14,7 @@ print(len([
     if len(p["hcl"])==7
     if p["hcl"].startswith("#")
     if len([*filter(lambda c: c in "0123456789abcdef", p["hcl"][1:])])==6
-    if (p["ecl"] in ["amb","blu","brn","gry","grn","hzl","oth"])
+    if p["ecl"] in ["amb","blu","brn","gry","grn","hzl","oth"]
     if len(p["pid"])==9
     if p["pid"].isdigit()
 ]))
