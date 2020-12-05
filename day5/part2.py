@@ -16,7 +16,8 @@ for p in passes:
             col_min, col = col, (col_max+col)//2
     seats[p] = row*8+col
 
-seat = [*set(range(min(seats.values()), max(seats.values())))
+seat = [*set(range(min(seats.values()),
+                   max(seats.values())))
         -set(seats.values())][0]
 
 print(f"[{seat}]"
