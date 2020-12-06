@@ -1,13 +1,14 @@
 from functools import reduce
-from operator import and_
+# from operator import or_
 
 groups = map(str.split, open("input.txt").read().split('\n\n'))
 
 total = 0
 for group in groups:
-    total += len(reduce(and_, [set(s) for s in group]))
+    # total += len(reduce(and_, [set(s) for s in group]))
+    total += len(reduce(set.intersection, (set(g) for g in group)))
 
 print(total)
 
-# as a one-liner
-# print(sum([len(__import__("functools").reduce(__import__("operator").and_, [set(s) for s in group])) for group in map(str.split,open("input.txt").read().split('\n\n'))]))
+# as one-liner
+# print("part1:", sum([len(__import__("functools").reduce(set.intersection, (set(g) for g in group))) for group in map(str.split, open("input.txt").read().split('\n\n'))]))
