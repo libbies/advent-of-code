@@ -11,4 +11,4 @@ for group in groups:
 print(total)
 
 # as one-liner
-# print("part1:", sum([len(__import__("functools").reduce(set.intersection, (set(g) for g in group))) for group in map(str.split, open("input.txt").read().split('\n\n'))]))
+# print("part2:", sum([len(__import__("functools").reduce(set.intersection, (set(g) for g in group))) for group in map(str.split, open("input.txt").read().split('\n\n'))]))
