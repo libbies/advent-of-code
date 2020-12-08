@@ -3,25 +3,23 @@ input = [*map(str.split, open("input.txt").read().splitlines())]
 end = len(input) - 1
 
 def run(target, replacement):
-    acc = 0
-    ptr = 0
+    acc, ptr = 0, 0
     history = set()
-    attempts = 0
     while ptr not in history:
         op, value = input[ptr]
-        if ptr == target:
-            # print(ptr, target, op, replacement)
-            op = replacement
         history.add(ptr)
+        if ptr == target:
+            # print(target, op, replacement)
+            op = replacement
         if ptr == end:
-            print(f"part2: target:{target}, acc:{acc}")
+            print(f"part2: acc:{acc}; target:{target},{input[target][0]}->{replacement}")
             return(True)
         if op == "acc":
             acc += int(value)
         if op == "nop":
             pass
         if op == "jmp":
-            ptr = ptr + int(value)
+            ptr += int(value)
         else:
             ptr += 1
     return(False)

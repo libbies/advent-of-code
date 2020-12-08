@@ -11,7 +11,7 @@ while ptr not in history:
     if op == "nop":
         pass
     if op == "jmp":
-        ptr = ptr + int(value)
+        ptr += int(value)
     else:
         ptr += 1
 
