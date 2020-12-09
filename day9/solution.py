@@ -18,6 +18,8 @@ for x in range(len(input)):
     for y in range(x, len(input)):
         if y-x <= 1:
             continue
-        if sum(input[x:y])==key:
+        if sum(input[x:y]) > key:
+            break
+        if sum(input[x:y]) == key:
             print(x, y, "=> part2:", max(input[x:y])+min(input[x:y]))
             raise(SystemExit)
