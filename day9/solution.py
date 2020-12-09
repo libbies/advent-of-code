@@ -20,4 +20,4 @@ for x in range(len(input)):
             continue
         if sum(input[x:y])==key:
             print(x, y, "=> part2:", max(input[x:y])+min(input[x:y]))
-            exit()
+            raise(SystemExit)
