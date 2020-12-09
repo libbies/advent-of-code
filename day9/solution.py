@@ -10,7 +10,7 @@ for n in range(len(input)-sz):
         if a+b == target:
             break
     else:
-        print(n, a, b, "|| part1:", target)
+        print("part1:", target)
         key = target
         break
 
@@ -19,6 +19,5 @@ for x in range(len(input)):
         if y-x <= 1:
             continue
         if sum(input[x:y])==key:
-            print(x, y, input[x], input[y], sum(input[x:y]),
-                    "|| part2:", max(input[x:y])+min(input[x:y]))
+            print(x, y, "=> part2:", max(input[x:y])+min(input[x:y]))
             break
