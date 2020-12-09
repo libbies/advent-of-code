@@ -1,3 +1,5 @@
+from functools import cache
+
 lines = open("input.txt").read().splitlines()
 
 bags = dict()
@@ -17,6 +19,7 @@ while queue:
             queue += [c[1].rsplit(maxsplit=1)[0] for c in contents]
     queue.pop(0)
 
+@cache
 def search(bag):
     if bag not in inner or inner[bag]==[('no', 'other')]:
         return(1)
