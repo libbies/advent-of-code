@@ -9,10 +9,10 @@ print("part1:", diffs.count('1') * (diffs.count('3')+1))
 diffs = [d for d in diffs.split('3') if d]
 
 total = 1
-for d in diffs:
-    if len(d) < 4:
-        total *= max(1, 2**(len(d)-1))
+for d in map(len, diffs):
+    if d < 4:
+        total *= max(1, 2**(d-1))
     else:
-        total *= 2**(len(d)-1)-1
+        total *= 2**(d-1)-1
 
 print("part2:", total)
