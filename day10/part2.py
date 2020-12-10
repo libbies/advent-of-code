@@ -1,33 +1,24 @@
-from functools import cache, reduce
+from functools import reduce
 from itertools import combinations
 from operator import mul
 
-input = sorted(map(int, open("input.txt").read().splitlines()))
-
-inputs = [0] + input + [input[-1]+3]
-
-del input
+inputs = sorted(map(int, open("input.txt").read().splitlines()))
+inputs = [0] + inputs + [inputs[-1]+3]
 
 def count_paths(head, tail):
+    paths = 0
     if tail - head <= 4:
-        paths = 1
-    else:
-        paths = 0
+        paths += 1
     for n in range(1, tail-head-1):
         paths += len([*combinations(inputs[head+1:tail-1], n)])
-        # print(inputs[head:tail], inputs[head+1:tail-1], n, [*combinations(inputs[head+1:tail-1], n), paths])
-    # print("x:", inputs[head:tail], inputs[head+1:tail-1], max(1, paths))
-    return max(1, paths)
+    return paths
 
-total = list()
+total = 1
 head, tail = 0, 0
 while tail < len(inputs)-1:
-    if inputs[tail+1] - inputs[tail]==3:
-        count = count_paths(head, tail+1)
-        total.append(count)
-        # print("c:", inputs[head:tail+1], count)
+    if (inputs[tail+1] - inputs[tail]) == 3:
+        total *= count_paths(head, tail+1)
         head = tail + 1
     tail += 1
 
-print(total)
-print("part2:", reduce(mul, total))
+print("part2:", total)
