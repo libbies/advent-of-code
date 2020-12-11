@@ -20,12 +20,12 @@ def count_paths(head, tail):
 total = 1
 head, tail = 0, 0
 while tail < len(inputs)-1:
-    if (inputs[tail+1] - inputs[tail]) == 3:
-        count = count_paths(head, tail+1)
+    tail += 1
+    if (inputs[tail] - inputs[tail-1]) == 3:
+        count = count_paths(head, tail)
         total *= count
         # print(len(inputs[head:tail+1]), inputs[head:tail+1], count)
-        head = tail + 1
-    tail += 1
+        head = tail
 
 print(f"part2: {total if len(str(total))<=20 else str(total).strip('0')[-10:]} "
       f"len: {len(str(total))}")
