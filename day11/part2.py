@@ -1,4 +1,4 @@
-from pprint import pprint
+# from pprint import pprint
 from copy import deepcopy
 
 rows = [' '+r+' ' for r in open("input.txt").read().replace('.',' ').splitlines()]
@@ -9,7 +9,7 @@ rows = [[c for c in r] for r in rows]
 lr, lc = len(rows), len(rows[0])
 iterations = 0
 while True:
-    print(iterations)
+    # print(iterations)
     state = deepcopy(rows)
     for x in range(1, len(rows)-1):
         for y in range(1, len(rows[0])-1):
