@@ -1,32 +1,31 @@
 from functools import reduce
 from itertools import combinations
-from operator import mul
+from operator import mul, sub
 
 inputs = sorted(map(int, open("input.txt").read().splitlines()))
 inputs = [0] + inputs + [inputs[-1]+3]
+diffs = [i[1]-i[0] for i in zip(inputs, inputs[1:])]
 
 def count_paths(head, tail):
     paths = 0
-    if tail - head <= 4:
-        paths += max(1, 2**(tail-head-2))
-    else:
-        paths = (2**(tail-head-2)-1)
-    return paths
-    #paths = 0
-    #if tail - head <= 4:
-    #    paths += 1
-    #for n in range(1, tail-head-1):
-    #    paths += len([*combinations(inputs[head+1:tail-1], n)])
-    #return paths
+    for n in range(len(inputs[head:tail])+1):
+        for path in combinations(inputs[head:tail], n):
+            if (len(path) <= 1 or inputs[head] not in path
+                    or inputs[tail-1] not in path):
+                continue
+            if max([i[1]-i[0] for i in zip([*path], [*path][1:])]) <= 3:
+                paths += 1
+    return max(1, paths)
 
-total = list()
+total = 1
 head, tail = 0, 0
 while tail < len(inputs)-1:
     if (inputs[tail+1] - inputs[tail]) == 3:
         count = count_paths(head, tail+1)
-        total.append(count)
-        print(len(inputs[head:tail+1]), inputs[head:tail+1], count)
+        total *= count
+        # print(len(inputs[head:tail+1]), inputs[head:tail+1], count)
         head = tail + 1
     tail += 1
 
-print(total, "part2:", reduce(mul, total))
+print(f"part2: {total if len(str(total))<=20 else str(total).strip('0')[-10:]} "
+      f"len: {len(str(total))}")
