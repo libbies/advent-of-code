@@ -1,5 +1,5 @@
 # from pprint import pprint
-from copy import deepcopy
+# from copy import deepcopy
 
 rows = [' '+r+' ' for r in open("input.txt").read().replace('.',' ').splitlines()]
 rows = [' '*len(rows[0])] + rows + [' '*len(rows[0])]
@@ -10,7 +10,8 @@ lr, lc = len(rows), len(rows[0])
 iterations = 0
 while True:
     # print(iterations)
-    state = deepcopy(rows)
+    state = [r[:] for r in rows[:]]
+    # state = deepcopy(rows)
     for x in range(1, len(rows)-1):
         for y in range(1, len(rows[0])-1):
             up = (rows[x-n][y] for n in range(1, x+1) if rows[x-n][y]!=' ')
@@ -33,5 +34,5 @@ while True:
         rows = state
         iterations += 1
 
-        # print(sum([[*r.values()].count('#') for r in rows.values()]))
+# print(sum([[*r.values()].count('#') for r in rows.values()]))
 print(iterations, "iterations, part1:", ''.join([''.join([c for c in r if c=='#']) for r in rows]).count('#'))
