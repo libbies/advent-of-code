@@ -27,25 +27,24 @@ for ticket in tickets[1:]:
 queue = [*range(len(rules))]
 order = [ None ] * len(rules)
 while queue:
-    fieldno = queue[0]
+    field = queue[0]
     candidates = list()
     for name, rule in rules.items():
         if name in order:
             continue
-        # print([t[fieldno] for t in valid_tickets], name, [r for r in rule])
         matches = [
-            (n,r) for n in [t[fieldno] for t in valid_tickets]
+            (n, r)
+            for n in [t[field] for t in valid_tickets]
             for r in rule if r[0]<=n<=r[1]
         ]
-        # print(len(matches))
         if len(matches) == len(valid_tickets):
             candidates.append(name)
-    # print(fieldno, candidates)
-    queue.remove(fieldno)
+    # print(field, candidates)
+    queue.remove(field)
     if len(candidates) == 1:
-        order[fieldno] = candidates[0]
+        order[field] = candidates[0]
     else:
-        queue.append(fieldno)
+        queue.append(field)
 
 total = 1
 for i, field in enumerate(order):
