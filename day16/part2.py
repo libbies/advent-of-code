@@ -33,7 +33,10 @@ while queue:
         if name in order:
             continue
         # print([t[fieldno] for t in valid_tickets], name, [r for r in rule])
-        matches = [(n,r) for n in [t[fieldno] for t in valid_tickets] for r in rule if r[0]<=n<=r[1]]
+        matches = [
+            (n,r) for n in [t[fieldno] for t in valid_tickets]
+            for r in rule if r[0]<=n<=r[1]
+        ]
         # print(len(matches))
         if len(matches) == len(valid_tickets):
             candidates.append(name)
@@ -50,4 +53,4 @@ for i, field in enumerate(order):
         print(field, tickets[0][i])
         total *= tickets[0][i]
 
-print(total)
+print("part2:", total)
