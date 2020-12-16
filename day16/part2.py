@@ -20,12 +20,12 @@ for l in lines:
 tickets = [[*map(int, l.split(','))] for l in lines if ',' in l]
 
 valid_tickets = list()
-for ticket in tickets[1:]:
+for ticket in tickets:
     if check_ticket(ticket):
         valid_tickets.append(ticket)
 
 queue = [*range(len(rules))]
-order = [ None ] * len(rules)
+order = [None] * len(rules)
 while queue:
     field = queue[0]
     candidates = list()
@@ -35,7 +35,7 @@ while queue:
         matches = [
             (n, r)
             for n in [t[field] for t in valid_tickets]
-            for r in rule if r[0]<=n<=r[1]
+            for r in rule if r[0] <= n <= r[1]
         ]
         if len(matches) == len(valid_tickets):
             candidates.append(name)
