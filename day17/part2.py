@@ -79,6 +79,7 @@ for iteration in range(6):
                     if layers[l][i][j][k] == '█' and cubes.count('█') not in (3, 4):
                         state[l][i][j][k] = ' '
 
+    # count active cubes
     layers = deepcopy(state)
     count = 0
     for l, layer in enumerate(layers):
@@ -86,5 +87,7 @@ for iteration in range(6):
             for j, row in enumerate(slice):
                 count += row.count('█')
 
-    # print(layers)
-    print(iteration, "iterations, part1:", count)
+    # pprint(layers)
+    # print(iteration, "iterations, count:", count)
+
+print(iteration+1, "iterations, part2:", count)
