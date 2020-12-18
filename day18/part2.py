@@ -2,7 +2,7 @@ import re
 
 def parse(seq):
     while '+' in seq:
-        match = re.search("[0-9]+([+][0-9]+)", seq)
+        match = re.search("[0-9]+([+][0-9]+)+", seq)
         result = eval(match.group(0))
         # print(match.group(0), '=', result)
         seq = seq.replace(match.group(0), str(result), 1)
