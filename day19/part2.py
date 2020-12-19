@@ -15,7 +15,7 @@ rules = {
 messages = [l for l in lines if l and l.isalpha()]
 
 @cache
-def evaluate(n, depth=0):
+def evaluate(n):
     """evaluate rule n"""
     if n not in rules.keys():
         raise(StopIteration)
