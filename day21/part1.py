@@ -24,7 +24,7 @@ while queue:
 safe = list()
 for ingredients in foods.keys():
     for ingredient in ingredients.split():
-        if ingredient not in {i for i in allergens.values()}:
+        if ingredient not in allergens.values():
             safe.append(ingredient)
 
 print("part1:", len(safe))
