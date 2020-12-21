@@ -1,4 +1,4 @@
-lines = open("example.txt").read().splitlines()
+lines = open("input.txt").read().splitlines()
 
 foods = dict()
 for line in lines:
