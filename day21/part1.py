@@ -9,11 +9,11 @@ allergens = dict()
 queue = list({a for allergens in foods.values() for a in allergens})
 while queue:
     allergen = queue.pop(0)
-    candidates = [
+    candidates = (
         {i for i in k.split() if i not in allergens.values()}
         for k, v in foods.items()
         if allergen in v
-    ]
+    )
     # print(allergen, candidates)
     candidate = set.intersection(*candidates)
     if len(candidate) == 1:
