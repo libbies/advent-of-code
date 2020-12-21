@@ -1,4 +1,4 @@
-lines = open("input.txt").read().splitlines()
+lines = open("example.txt").read().splitlines()
 
 foods = dict()
 for line in lines:
@@ -10,20 +10,14 @@ queue = list({a for allergens in foods.values() for a in allergens})
 while queue:
     allergen = queue.pop(0)
     candidates = [
-        [i for i in k.split() if i not in allergens.values()]
+        {i for i in k.split() if i not in allergens.values()}
         for k, v in foods.items()
         if allergen in v
     ]
     # print(allergen, candidates)
-    if len(candidates) == 1:
-        if len(candidates[0]) == 1:
-            allergens[allergen] = candidates[0][0]
-    elif len(candidates) > 1:
-        candidate = set.intersection(*[set(i) for i in candidates])
-        if len(candidate) == 1:
-            allergens[allergen] = next(iter(candidate))
-        else:
-            queue.append(allergen)
+    candidate = set.intersection(*candidates)
+    if len(candidate) == 1:
+        allergens[allergen] = next(iter(candidate))
     else:
         queue.append(allergen)
 
