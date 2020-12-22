@@ -1,6 +1,3 @@
-import code
-from copy import deepcopy
-
 P1 = "Player 1"
 P2 = "Player 2"
 
@@ -10,7 +7,7 @@ decks = {
 }
 
 def score(l):
-    return sum([x*y for x,y in [*zip(l, reversed(range(1,len(l)+1)))]])
+    return sum((x*y for x,y in [*zip(l, reversed(range(1, len(l)+1)))]))
 
 game = 1
 def recurse(decks):
@@ -29,19 +26,18 @@ def recurse(decks):
         # print(f"P2 plays {decks[P2][0]}")
         if decks[P1] in history[P1] and decks[P2] in history[P2]:
             return P1
-        history[P1].append(deepcopy(decks[P1]))
-        history[P2].append(deepcopy(decks[P2]))
+        history[P1].append(list(decks[P1]))
+        history[P2].append(list(decks[P2]))
         c1 = decks[P1].pop(0)
         c2 = decks[P2].pop(0)
         winner = None
         if len(decks[P1]) >= c1 and len(decks[P2]) >= c2:
             game += 1
-            # print('\n' + f"=== Game {game} ===" + '\n')
-            r_decks = {
+            # print(f"=== Game {game} ===")
+            winner = recurse({
                 P1: decks[P1][:c1],
                 P2: decks[P2][:c2],
-            }
-            winner = recurse(r_decks)
+            })
         if winner == P1 or (c1 > c2 and not winner):
             winner = P1
             decks[P1].append(c1)
