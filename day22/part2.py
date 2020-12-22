@@ -25,7 +25,7 @@ def recurse(decks):
         # print(f"P1 plays {decks[P1][0]}")
         # print(f"P2 plays {decks[P2][0]}")
         if decks[P1] in history[P1] and decks[P2] in history[P2]:
-            if g%1000 == 0:
+            if g%1250 == 0:
                 print(f"The winner of game {g} is {P1}!")
             return P1
         history[P1].append(list(decks[P1]))
