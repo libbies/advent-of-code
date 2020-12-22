@@ -13,21 +13,21 @@ def rotate(t, rotations=0):
 def get_edges(t, rotations=0):
     """binary -> decimal, so i can actually read the numbers ;_;"""
     t = rotate(t, rotations)
-    return [
+    return (
         int(''.join(t[0]), 2), # top
         int(''.join(r[-1] for r in t), 2), # right
         int(''.join(t[-1]), 2), # bottom
         int(''.join(r[0] for r in t), 2), # left
-    ]
+    )
 
 tiles = dict()
 for lines in map(str.split, open("input.txt").read().split('\n\n')):
     # print(tile)
     tiles[int(lines[1][:-1])] = [
         lines[2],
-        ''.join((r[-1] for r in lines[2:])),
+        ''.join(r[-1] for r in lines[2:]),
         lines[-1],
-        ''.join((r[0] for r in lines[2:])),
+        ''.join(r[0] for r in lines[2:]),
     ]
 
 part1 = 1
@@ -77,7 +77,7 @@ for n in range(1, l-1):
     grid[n][0] = next(
         k for k,v in edges.items()
         if grid[n-1][0] in v
-        if k not in [c for row in grid for c in row]
+        if k not in (c for row in grid for c in row)
     )
 
 ### lower left corner
@@ -91,7 +91,7 @@ for n in range(1, l-1):
     grid[n][-1] = next(
         k for k,v in edges.items()
         if grid[n-1][-1] in v
-        if k not in [c for row in grid for c in row]
+        if k not in (c for row in grid for c in row)
     )
 
 ### top edge of image
@@ -99,7 +99,7 @@ for n in range(1, l-1):
     grid[-1][n] = next(
         k for k, v in edges.items()
         if grid[-1][n-1] in v
-        if k not in [c for row in grid for c in row]
+        if k not in (c for row in grid for c in row)
     )
 
 ### lower right corner
@@ -116,7 +116,7 @@ for x in range(1, l-1):
             k for k,v in inner.items()
             if grid[x-1][y] in v
             and grid[x][y-1] in v
-            if k not in [c for row in grid for c in row]
+            if k not in (c for row in grid for c in row)
         )
 
 pprint(grid)
@@ -178,7 +178,7 @@ for x in range(2, l):
                 if (get_edges(image[x-1,y])[BOTTOM] == get_edges(image[x,y], c0)[TOP]
                         and get_edges(image[x-1,y+1])[BOTTOM] == get_edges(image[x,y+1], c1)[TOP]
                         and get_edges(image[x,y], c0)[RIGHT] == get_edges(image[x,y+1], c1)[LEFT]):
-                    # print(x, y, r0, r1)
+                    # print(x, y, c0, c1)
                     image[x,y] = rotate(image[x,y], c0)
                     image[x,y+1] = rotate(image[x,y+1], c1)
                     break

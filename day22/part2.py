@@ -7,7 +7,7 @@ decks = {
 }
 
 def score(l):
-    return sum((x*y for x,y in [*zip(l, reversed(range(1, len(l)+1)))]))
+    return sum(x*y for x,y in [*zip(l, reversed(range(1, len(l)+1)))])
 
 game = 1
 def recurse(decks):
@@ -25,6 +25,8 @@ def recurse(decks):
         # print(f"P1 plays {decks[P1][0]}")
         # print(f"P2 plays {decks[P2][0]}")
         if decks[P1] in history[P1] and decks[P2] in history[P2]:
+            if g%1000 == 0:
+                print(f"The winner of game {g} is {P1}!")
             return P1
         history[P1].append(list(decks[P1]))
         history[P2].append(list(decks[P2]))
@@ -48,7 +50,7 @@ def recurse(decks):
             decks[P2].append(c1)
         # print(f"{winner} wins round {round} of game {g}!")
         round += 1
-    if g%100 == 0:
+    if g%1250 == 0:
         print(f"The winner of game {g} is {winner}!")
     if g == 1:
         print(f"part2: {score(decks[P1]) + score(decks[P2])}")
