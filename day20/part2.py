@@ -121,11 +121,6 @@ for x in range(1, l-1):
 
 pprint(grid)
 
-# now that we have the grid ids,
-# we have to rotate/mirror tiles to get the correct alignment
-
-neighbors = corners | edges | inner
-
 tiles = dict()
 for lines in map(str.split, open("input.txt").read().replace('.', '0').replace('#', '1').split('\n\n')):
     # print(tile)
@@ -138,7 +133,10 @@ for x in range(l):
 
 image = np.array(image)
 
-# each tile needs two adjacent matches to place the tile
+
+# now that we have the grid ids,
+# we have to rotate/mirror tiles to get the correct alignment
+# each tile needs two adjacent matches to orient the tile
 # so we can put the top 2x2 in place first
 # and then figure out the rest using the 2x2 as guides
 TOP = 0
@@ -193,7 +191,7 @@ for x in range(l):
 
 lines = np.array(lines)
 
-# beyong here be dragons
+# beyond here be dragons
 # '01234567890123456789'
 #0'                  # '
 #1'#    ##    ##    ###'
