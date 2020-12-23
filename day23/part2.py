@@ -12,7 +12,8 @@ class queue(deque):
             for c in self.inserts[p]:
                 self.append(c)
             del self.inserts[p]
-        return self.pop()
+            return self.pop()
+        return p
     def qpopleft(self):
         p = self.popleft()
         if p in self.inserts:
@@ -39,7 +40,8 @@ while move <= 10000000:
         cups.inserts[dst] = pickup
         break
     if move % 1000000 == 0:
-        print(f"mv:{move:>8}, len: {len(cups)}, {dst:>6}: {pickup}")
+        print(f"mv:{move:>8}, len(cups): {len(cups)} + {len(cups.inserts)*3}"
+              f" = {len(cups)+len(cups.inserts)*3}, {dst:>6}: {pickup}")
     move += 1
 
 answer = list()
