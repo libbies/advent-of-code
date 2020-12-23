@@ -9,16 +9,14 @@ class queue(deque):
         p = self.pop()
         if p in self.inserts:
             self.append(p)
-            for c in self.inserts[p]:
-                self.append(c)
+            self.extend(self.inserts[p])
             del self.inserts[p]
             return self.pop()
         return p
     def qpopleft(self):
         p = self.popleft()
         if p in self.inserts:
-            for c in reversed(self.inserts[p]):
-                self.appendleft(c)
+            self.extendleft(reversed(self.inserts[p]))
             del self.inserts[p]
         return p
     def qindex(self, item):
@@ -27,6 +25,7 @@ class queue(deque):
             i = self.qindex(k)
             for c in reversed(self.inserts[k]):
                 self.insert(i+1, c)
+            del self.inserts[k]
         return self.index(item)
 
 cups = queue(map(int, open("input.txt").read().strip())) + queue(range(10, 1000001))
@@ -53,7 +52,7 @@ while move <= 10000000:
 
 answer = list()
 
-if 1 not in cups:
+if 1 not in cups and 1 not in cups.inserts:
     print("1 not found, inserting...")
     print("...done, qidx =", cups.qindex(1))
 
