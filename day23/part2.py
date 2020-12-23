@@ -21,6 +21,13 @@ class queue(deque):
                 self.appendleft(c)
             del self.inserts[p]
         return p
+    def qindex(self, item):
+        if item not in self:
+            k = next((k for k, v in self.inserts.items() if item in v), None)
+            i = self.qindex(k)
+            for c in reversed(self.inserts[k]):
+                self.insert(i+1, c)
+        return self.index(item)
 
 cups = queue(map(int, open("input.txt").read().strip())) + queue(range(10, 1000001))
 
@@ -45,11 +52,16 @@ while move <= 10000000:
     move += 1
 
 answer = list()
+
+if 1 not in cups:
+    print("1 not found, inserting...")
+    print("...done, qidx =", cups.qindex(1))
+
 if 1 in cups.inserts:
     answer += cups.inserts[1]
 elif 1 in cups:
-    answer.append(cups[cups.index(1)+1])
-    answer.append(cups[cups.index(1)+2])
+    answer.append(cups[(cups.index(1)+1)%len(cups)])
+    answer.append(cups[(cups.index(1)+2)%len(cups)])
 
 if answer[0] in cups.inserts:
     print("part2:", answer[0] * cups.inserts[answer[0]][0])
