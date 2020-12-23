@@ -3,8 +3,8 @@ from collections import deque
 
 class queue(deque):
     def __init__(self, iterable=None):
-        self.inserts = dict()
         super().__init__(iterable)
+        self.inserts = dict()
     def qpop(self):
         p = self.pop()
         if p in self.inserts:
@@ -23,10 +23,8 @@ class queue(deque):
 
 cups = queue(map(int, open("input.txt").read().strip())) + queue(range(10, 1000001))
 
-l = len(cups)
 m = max(cups)
 move = 1
-cursor = cups[0]
 while move <= 10000000:
     label = cups.qpopleft()
     cups.append(label)
