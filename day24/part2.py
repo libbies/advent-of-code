@@ -38,7 +38,7 @@ print("part1:", list(tiles.values()).count(BLACK), '\n')
 for day in range(1, 101):
     tmp = deepcopy(tiles)
     for tile, value in tmp.items():
-        # necessary to preinitialize tiles that may flip"""
+        # necessary to preinitialize tiles that may flip
         if value == BLACK:
             for x,y in ((sum(x) for x in zip(tile, d))
                     for d in ((1,0),(-1,0),(0.5,1),(0.5,-1),(-0.5,1),(-0.5,-1))):
