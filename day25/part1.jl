@@ -3,12 +3,8 @@ using LRUCache
 const lru = LRU{Int64, Int64}(maxsize=1)
 function recurse(iterations::Int64)
     get!(lru, iterations) do
-        uncached_recurse(iterations)
+        return 7 * recurse(iterations - 1) % 20201227
     end
-end
-
-function uncached_recurse(iterations::Int64)
-    return 7 * recurse(iterations - 1) % 20201227
 end
 
 function transform(sn::Int64, iterations::Int64)
@@ -30,8 +26,7 @@ while true
         println("card loop: ", loop)
         println("part1: ", transform(door_pub_key, loop))
         break
-    end
-    if key == door_pub_key
+    elseif key == door_pub_key
         println("door loop: ", loop)
         println("part1: ", transform(card_pub_key, loop))
         break
