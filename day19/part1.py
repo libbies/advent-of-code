@@ -1,5 +1,5 @@
 from itertools import product
-from functools import cache
+from functools import lru_cache
 
 lines = open("input.txt").read().splitlines()
 
@@ -11,14 +11,11 @@ rules = {
     )
 }
 
-messages = [l for l in lines if l and l.isalpha()]
+messages = (l for l in lines if l and l.isalpha())
 
-@cache
+@lru_cache(maxsize=len(rules))
 def evaluate(n):
     """evaluate rule n"""
-    if n not in rules.keys():
-        raise(StopIteration)
-    # print("rule:", rules[n])
     if rules[n] == [['"a"']]:
         return ["a"]
     elif rules[n] == [['"b"']]:
@@ -26,12 +23,10 @@ def evaluate(n):
     else:
         candidates = list()
         for rule in rules[n]:
-            e = [evaluate(r) for r in rule]
-            # print("e:", e)
-            # print("p:", [''.join(p) for p in product(*e)])
-            candidates += [''.join(p) for p in product(*e)]
+            e = (evaluate(r) for r in rule)
+            candidates.extend(''.join(p) for p in product(*e))
     return candidates
 
 valid = evaluate("0")
 
-print(len([msg for msg in messages if msg in valid]))
+print("part1:", len([msg for msg in messages if msg in valid]))
