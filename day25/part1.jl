@@ -16,11 +16,12 @@ function transform(sn::Int64, iterations::Int64)
 end
 
 card_pub_key, door_pub_key = map(v -> parse(Int, v), readlines("input.txt"))
-
+# key = 1
 loop = 0
 setindex!(lru, 1, 0)
 while true
     global loop += 1
+    # global key = 7 * key % 20201227
     key = recurse(loop)
     if key == card_pub_key
         println("card loop: ", loop)
