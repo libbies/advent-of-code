@@ -16,18 +16,19 @@ function transform(sn, iterations)
     return result
 end
 
-card_pub_key, door_pub_key = map(v -> parse(Int, v), readlines("input.txt"))
-key = 1
-for loop in 1:door_pub_key
-    # key = recurse(loop)
-    global key = 7 * key % 20201227
-    if key == card_pub_key
-        println("card loop: ", loop)
-        println("part1: ", transform(door_pub_key, loop))
-        break
-    elseif key == door_pub_key
-        println("door loop: ", loop)
-        println("part1: ", transform(card_pub_key, loop))
-        break
+const card_pub_key, door_pub_key = map(v -> parse(Int, v), readlines("input.txt"))
+let key = 1
+    for loop in 1:door_pub_key
+        # key = recurse(loop)
+        key = 7 * key % 20201227
+        if key == card_pub_key
+            println("card loop: ", loop)
+            println("part1: ", transform(door_pub_key, loop))
+            break
+        elseif key == door_pub_key
+            println("door loop: ", loop)
+            println("part1: ", transform(card_pub_key, loop))
+            break
+        end
     end
 end
