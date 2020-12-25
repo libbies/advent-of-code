@@ -8,27 +8,20 @@ function recurse(iterations)
     end
 end
 
-function transform(sn, iterations)
-    result = 1
-    for n in 1:iterations
-        result = sn * result % 20201227
-    end
-    return result
-end
-
 function main()
     card_pub_key, door_pub_key = map(v -> parse(Int, v), readlines("input.txt"))
     key = 1
     for loop in 1:door_pub_key
+        # key = powermod(7, loop, 20201227)
         # key = recurse(loop)
         key = 7 * key % 20201227
         if key == card_pub_key
             println("card loop: ", loop)
-            println("part1: ", transform(door_pub_key, loop))
+            println("part1: ", powermod(card_pub_key, loop, 20201227))
             break
         elseif key == door_pub_key
             println("door loop: ", loop)
-            println("part1: ", transform(card_pub_key, loop))
+            println("part1: ", powermod(card_pub_key, loop, 20201227))
             break
         end
     end
