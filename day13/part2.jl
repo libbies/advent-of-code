@@ -1,3 +1,8 @@
+function crt(n::Array, a::Array)
+    p = prod(n)
+    mod(sum(ai * invmod(p ÷ ni, ni) * (p ÷ ni) for (ni, ai) in zip(n, a)), p)
+end
+
 function main()
     input = [
         tryparse(Int, i)!=nothing ? parse(Int, i) : nothing
@@ -11,12 +16,8 @@ function main()
         end
     end
 
-    function crt(n::Array, a::Array)
-        p = prod(n)
-        mod(sum(ai * invmod(p ÷ ni, ni) * (p ÷ ni) for (ni, ai) in zip(n, a)), p)
-    end
-
-    println("part2: ", prod(keys(buses)) - crt(collect(keys(buses)), collect(values(buses))))
+    println("part2: ", prod(keys(buses))
+        - crt(collect(keys(buses)), collect(values(buses))))
 end
 
 main()
