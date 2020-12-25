@@ -16,8 +16,9 @@ function transform(sn, iterations)
     return result
 end
 
-const card_pub_key, door_pub_key = map(v -> parse(Int, v), readlines("input.txt"))
-let key = 1
+function main()
+    card_pub_key, door_pub_key = map(v -> parse(Int, v), readlines("input.txt"))
+    key = 1
     for loop in 1:door_pub_key
         # key = recurse(loop)
         key = 7 * key % 20201227
@@ -32,3 +33,5 @@ let key = 1
         end
     end
 end
+
+main()
