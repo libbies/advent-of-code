@@ -2,13 +2,13 @@ using LRUCache
 
 const lru = LRU{Int64, Int64}(maxsize=1)
 lru[0] = 1
-function recurse(iterations::Int64)
+function recurse(iterations)
     get!(lru, iterations) do
         return 7 * recurse(iterations - 1) % 20201227
     end
 end
 
-function transform(sn::Int64, iterations::Int64)
+function transform(sn, iterations)
     result = 1
     for n in 1:iterations
         result = sn * result % 20201227
