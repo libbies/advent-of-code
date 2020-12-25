@@ -1,4 +1,4 @@
-input = map(str.split, open("input.txt").read().splitlines())
+input = list(map(str.split, open("input.txt").read().splitlines()))
 
 acc = 0
 ptr = 0
