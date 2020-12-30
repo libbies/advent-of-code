@@ -20,8 +20,9 @@ def get_edges(t, rotations=0):
         int(''.join(r[0] for r in t), 2), # left
     )
 
+filename = "input.txt"
 tiles = dict()
-for lines in map(str.split, open("input.txt").read().split('\n\n')):
+for lines in map(str.split, open(filename).read().split('\n\n')):
     # print(tile)
     tiles[int(lines[1][:-1])] = [
         lines[2],
@@ -122,7 +123,7 @@ for x in range(1, l-1):
 pprint(grid)
 
 tiles = dict()
-for lines in map(str.split, open("input.txt").read().replace('.', '0').replace('#', '1').split('\n\n')):
+for lines in map(str.split, open(filename).read().replace('.', '0').replace('#', '1').split('\n\n')):
     # print(tile)
     tiles[int(lines[1][:-1])] = np.array([list(row) for row in lines[2:]])
 
@@ -199,25 +200,25 @@ lines = np.array(lines)
 
 dragons = 0
 l = len(lines)
-for r in range(4):
-    lines = rotate(lines, 1)
+for r in range(8):
+    image = rotate(lines, r)
     for x in range(l-2):
         for y in range(l-19):
-            if ('1' == lines[x,y+18]
-                    == lines[x+1,y]
-                    == lines[x+1,y+5]
-                    == lines[x+1,y+6]
-                    == lines[x+1,y+11]
-                    == lines[x+1,y+12]
-                    == lines[x+1,y+17]
-                    == lines[x+1,y+18]
-                    == lines[x+1,y+19]
-                    == lines[x+2,y+1]
-                    == lines[x+2,y+4]
-                    == lines[x+2,y+7]
-                    == lines[x+2,y+10]
-                    == lines[x+2,y+13]
-                    == lines[x+2,y+16]):
+            if ('1' == image[x,y+18]
+                    == image[x+1,y]
+                    == image[x+1,y+5]
+                    == image[x+1,y+6]
+                    == image[x+1,y+11]
+                    == image[x+1,y+12]
+                    == image[x+1,y+17]
+                    == image[x+1,y+18]
+                    == image[x+1,y+19]
+                    == image[x+2,y+1]
+                    == image[x+2,y+4]
+                    == image[x+2,y+7]
+                    == image[x+2,y+10]
+                    == image[x+2,y+13]
+                    == image[x+2,y+16]):
                 # print("whee, a dragon")
                 dragons += 1
 
