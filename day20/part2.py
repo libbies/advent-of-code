@@ -222,7 +222,7 @@ for r in range(8):
                 # print("whee, a dragon")
                 dragons += 1
 
-print(f"{dragons} dragons found, covering {15*dragons} #s")
+print(f"{dragons} sea monsters found, covering {15*dragons} #s")
 
 print(f"{np.unique(lines, return_counts=True)[-1][-1]} - {15*dragons}"
       f" = part2: {np.unique(lines, return_counts=True)[-1][-1]-15*dragons}")
