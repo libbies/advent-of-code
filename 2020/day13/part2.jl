@@ -5,7 +5,7 @@ end
 
 function main()
     input = [
-        tryparse(Int, i)!=nothing ? parse(Int, i) : nothing
+        tryparse(Int, i) isa Number ? parse(Int, i) : nothing
         for i in split(readlines("input.txt")[end], ",")
     ]
 

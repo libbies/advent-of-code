@@ -9,7 +9,7 @@ function recurse(iterations)
 end
 
 function main()
-    card_pub_key, door_pub_key = map(v -> parse(Int, v), readlines("input.txt"))
+    card_pub_key, door_pub_key = parse.(Int, readlines("input.txt"))
     key = 1
     for loop in 1:door_pub_key
         # key = powermod(7, loop, 20201227)
