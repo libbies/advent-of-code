@@ -10,20 +10,14 @@ points = {
 
 scores = list()
 for line in lines:
-    l = list(line)
     tokens = []
-    for i, c in enumerate(l):
-        if not tokens:
-            if c in ")]}>":
-                break
-            tokens.append(c)
-        elif c in points:
+    for c in line:
+        if not tokens or c in "([{<":
             tokens.append(c)
         elif "([{<".index(tokens[-1])==")]}>".index(c):
             tokens.pop()
         elif c in ")]}>":
             break
-        # else:                                 # undefined
     else:
         score = 0
         for c in tokens[::-1]:
@@ -31,5 +25,5 @@ for line in lines:
             score += points[c]
         scores.append(score)
 
-answer = (len(scores), sorted(scores)[len(scores)//2])
+answer = sorted(scores)[len(scores)//2]
 print("day 10 part 1:", answer)
