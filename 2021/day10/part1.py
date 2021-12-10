@@ -12,7 +12,7 @@ answer = 0
 for line in lines:
     tokens = []
     for c in line:
-        if not tokens or c in "([{<":
+        if c in "([{<":
             tokens.append(c)
         elif "([{<".index(tokens[-1])==")]}>".index(c):
             tokens.pop()
