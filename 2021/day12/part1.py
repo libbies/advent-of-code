@@ -1,3 +1,4 @@
+#!python
 """advent of code 2021 day 12 part 1"""
 from collections import defaultdict
 lines = [_.split('-') for _ in open("input.txt").read().splitlines()]

@@ -1,3 +1,4 @@
+#!python
 """advent of code 2021 day 12 part 2"""
 from collections import defaultdict
 lines = [_.split('-') for _ in open("input.txt").read().splitlines()]
@@ -12,27 +13,28 @@ for c1,c2 in lines:
 complete = set()
 deadends = set()
 path = ["start"]
+counts = defaultdict(int)
 while path:
-    dupe = False
-    for p in path:
-        if p.islower() and path.count(p)>=2:
-            dupe = True
-            break
     for c in paths[path[-1]]:
         if c=="end":
             if tuple(path) not in complete:
                 complete.add(tuple(path))
             continue
-        if c.islower() and c in path and dupe:
+        if c.islower() and c in path and 2 in counts.values():
             continue
         if tuple(path+[c]) in deadends:
             continue
+        if c.islower():
+            counts[c] += 1
         path.append(c)
         break
     else:
         deadends.add(tuple(path))
-        if path.pop()=="start":
+        c = path.pop()
+        if c=="start":
             break
+        if c.islower():
+            counts[c] -= 1
 
 answer = len(complete)
 print("aoc 2021 day 12 part 2:", answer)
