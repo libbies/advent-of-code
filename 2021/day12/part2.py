@@ -1,6 +1,5 @@
 """advent of code 2021 day 12 part 2"""
 lines = [_.split('-') for _ in open("input.txt").read().splitlines()]
-caves = {c:False for line in lines for c in line if c!="start"}
 
 paths = dict()
 for c1,c2 in lines:
