@@ -1,4 +1,4 @@
-"""advent of code 2021 day 12 part 2"""
+"""advent of code 2021 day 12 part 1"""
 lines = [_.split('-') for _ in open("input.txt").read().splitlines()]
 caves = {c:False for line in lines for c in line if c!="start"}
 
@@ -19,11 +19,10 @@ path = ["start"]
 while path:
     if "end" in paths[path[-1]] and tuple(path+["end"]) not in completed:
         completed.add(tuple(path+["end"]))
-    counts = [path.count(p) for p in path if p.islower()]
     for c in paths[path[-1]]:
-        if c in ("start", "end"):
+        if c in ["start", "end"]:
             continue
-        if c.islower() and c in path and 2 in counts:
+        if c.islower() and c in path:
             continue
         if tuple(path+[c]) in deadends:
             continue
@@ -35,4 +34,4 @@ while path:
             break
 
 answer = len(completed)
-print("aoc 2021 day 12 part 2:", answer)
+print("aoc 2021 day 12 part 1:", answer)
