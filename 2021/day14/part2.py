@@ -1,14 +1,12 @@
 #!python
 """advent of code 2021 day 14 part 2"""
-from collections import Counter, deque, defaultdict
+from collections import Counter, defaultdict
 lines = open("input.txt").read().splitlines()
-template = list(lines[0])
+polymer = defaultdict(int, Counter(zip(lines[0], lines[0][1:])))
 rules = dict()
 for line in (l for l in lines if "->" in l):
     pair, _, elem = line.split()
     rules[(pair[0], pair[1])] = elem
-
-polymer = defaultdict(int, Counter(zip(template, template[1:])))
 
 step = 0
 while step<40:
