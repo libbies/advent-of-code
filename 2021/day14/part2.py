@@ -11,18 +11,14 @@ for line in (l for l in lines if "->" in l):
 step = 0
 while step<40:
     step += 1
-    merge = defaultdict(int)
-    for p in polymer:
-        merge[(p[0],rules[p])] += polymer[p]
-        merge[(rules[p],p[1])] += polymer[p]
-        merge[p] -= polymer[p]
-    for p in merge:
-        polymer[p] += merge[p]
+    for p, val in list(polymer.items()):
+        polymer[(p[0],rules[p])] += val
+        polymer[(rules[p],p[1])] += val
+        polymer[p] -= val
 
-counts = defaultdict(int)
-for p in polymer:
-    counts[p[0]] += polymer[p]
-counts[lines[0][-1]] += 1
+counts = defaultdict(int, {lines[0][-1]: 1})
+for p, val in polymer.items():
+    counts[p[0]] += val
 
 elems = sorted(counts.values())
 answer = elems[-1] - elems[0]
