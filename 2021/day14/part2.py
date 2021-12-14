@@ -22,7 +22,8 @@ while step<40:
 counts = defaultdict(int)
 for p in polymer:
     counts[p[0]] += polymer[p]
+counts[lines[0][-1]] += 1
 
 elems = sorted(counts.values())
-answer = elems[-1] - elems[0] + 1
+answer = elems[-1] - elems[0]
 print("aoc 2021 day 14 part 2:", answer)
