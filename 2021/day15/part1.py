@@ -29,14 +29,12 @@ best = scoreboard[0][0]
 while True:
     for x in chain(range(l), reversed(range(l))):
         for y in chain(range(l), reversed(range(l))):
-            new_min = riskmap[x][y] + min(
+            scoreboard[x][y] = riskmap[x][y] + min(
                 scoreboard[x-1][y] if x>0 else best,
                 scoreboard[x+1][y] if x<l-1 else best,
                 scoreboard[x][y-1] if y>0 else best,
                 scoreboard[x][y+1] if y<l-1 else best,
             )
-            if scoreboard[x][y] > new_min:
-                scoreboard[x][y] = new_min
     if best>scoreboard[0][0]:
         best = scoreboard[0][0]
     else:
