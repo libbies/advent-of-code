@@ -14,6 +14,7 @@ for x, line in enumerate(lines):
 
 l = len(riskmap)
 scoreboard = {x: {y: 0 for y in range(l)} for x in range(l)}
+# starting from the lower-right position, we calculate base risk scores.
 # the initial base risk of each position is the risk of the position itself
 # plus the lesser of the neighbor to the right (y+1) or below (x+1)
 scoreboard[l-1][l-1] = riskmap[l-1][l-1]
