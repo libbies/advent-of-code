@@ -27,8 +27,8 @@ for x in reversed(range(l-1)):
 # we loop until the score for the starting position (0,0) has reached minimum
 best = scoreboard[0][0]
 while True:
-    for x in chain(range(l-1), reversed(range(l-1))):
-        for y in chain(range(l-1), reversed(range(l-1))):
+    for x in chain(range(l), reversed(range(l))):
+        for y in chain(range(l), reversed(range(l))):
             new_min = riskmap[x][y] + min(
                 scoreboard[x-1][y] if x>0 else best,
                 scoreboard[x+1][y] if x<l-1 else best,
