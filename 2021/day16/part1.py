@@ -92,7 +92,7 @@ class Packet():
 queue = [Packet(bits=None, hexits=open("input.txt").read().strip())]
 answer = 0
 while queue:
-    packet = queue.pop(0)
+    packet = queue.pop()
     answer += packet.version
     if packet.type!=4:
         queue.extend(packet.subpackets)
