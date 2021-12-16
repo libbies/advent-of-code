@@ -64,8 +64,8 @@ class Packet():
                 if bit[0]=="0":
                     break
             assert len(self._groups)>=1
-            self._len = (5*len(self._groups))+6
-            return int("0b"+''.join(b[-4:] for b in self._groups), 2)
+            self._len = 6 + len(self._groups)*5
+            return int("0b"+''.join(bit[-4:] for bit in self._groups), 2)
         elif self.type==5: # op:gt
             assert len(self.subpackets)==2
             return self.subpackets[0].value>self.subpackets[-1].value
