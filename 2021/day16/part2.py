@@ -57,7 +57,7 @@ class Packet():
             return min(p.value for p in self.subpackets)
         elif self.type==3: # op:max
             return max(p.value for p in self.subpackets)
-        elif self.type==4: # val
+        elif self.type==4: # int
             self._groups = []
             for bit in [self._raw[6:][i*5:(i+1)*5] for i in range(len(self._raw[6:])//5)]:
                 self._groups.append(bit)
@@ -72,7 +72,7 @@ class Packet():
         elif self.type==6: # op:lt
             assert len(self.subpackets)==2
             return self.subpackets[0].value<self.subpackets[-1].value
-        elif self.type==7: # op:cmp
+        elif self.type==7: # op:eq
             assert len(self.subpackets)==2
             return self.subpackets[0].value==self.subpackets[-1].value
 
