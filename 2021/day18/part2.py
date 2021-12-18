@@ -13,21 +13,24 @@ class Pair(object):
             self.left.parent = self
         if type(self.right)==Pair:
             self.right.parent = self
+
     def find_to_left(self):
         if not self.parent or self.parent.right==self:
             return self.parent
         return self.parent.find_to_left()
+
     def find_to_right(self):
         if not self.parent or self.parent.left==self:
             return self.parent
         return self.parent.find_to_right()
+
     def reduce(self):
         while not self.explode():
             return False
-        if self.max>=10:
-            while not self.split():
-                return False
+        while not self.split():
+            return False
         return True
+
     def explode(self):
         for p1 in self: # p0 = self
             if isinstance(p1, int):
@@ -63,6 +66,7 @@ class Pair(object):
                             p3.right = 0
                         return False
         return True
+
     def split(self):
         if isinstance(self.left, int) and self.left>=10:
             self.left = Pair(self.left//2, self.left//2 + self.left%2)
@@ -77,16 +81,20 @@ class Pair(object):
             self.right.parent = self
             return False
         return True
+
     @property
     def magnitude(self):
         left  = self.left  if isinstance(self.left,  int) else self.left.magnitude
         right = self.right if isinstance(self.right, int) else self.right.magnitude
         return 3*left + 2*right
+
     def __contains__(self, arg):
         return arg in (self.left, self.right)
+
     def __iter__(self):
         for _ in (self.left, self.right):
             yield _
+
     def __repr__(self):
         return f"Pair({self.left},{self.right})"
 
