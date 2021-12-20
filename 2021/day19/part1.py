@@ -24,10 +24,13 @@ for line in lines:
         scanners[scanner].append(Beacon(*map(int, line.split(","))))
 
 aligned = [0]
+scanned = []
 while [s for s in scanners if s not in aligned]:
     for s1 in aligned:
-        for s2 in scanners:
-            for cx, cy, cz in permutations(['x', 'y', 'z']):
+        if s1 in scanned:
+            continue
+        for s2 in (s for s in scanners if s not in aligned):
+            for cx, cy, cz in permutations(('x', 'y', 'z')):
                 for sx, sy, sz in product((1, -1), (1, -1), (1, -1)):
                     if s2 in aligned:
                         break
@@ -39,6 +42,7 @@ while [s for s in scanners if s not in aligned]:
                         print(f"aligning s{s2} to s{s1}")
                         scanners[s2] = [Beacon(sx*b[cx]+ox, sy*b[cy]+oy, sz*b[cz]+oz) for b in scanners[s2]]
                         aligned.append(s2)
+        scanned.append(s1)
 
 answer = len({(b.x, b.y, b.z) for s in scanners.values() for b in s})
 print("aoc 2021 day 19 part 1:", answer)
