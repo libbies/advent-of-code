@@ -61,4 +61,5 @@ while step<limit:
     # print_image(result)
     image = result
 
-print("aoc 2021 day 20 part 2:", count(image))
+answer = count(image)
+print("aoc 2021 day 20 part 2:", answer)
