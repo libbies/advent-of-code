@@ -23,12 +23,14 @@ for line in lines:
     elif line:
         scanners[scanner].append(Beacon(*map(int, line.split(","))))
 
-offsets = []
+offsets, scanned = [], []
 aligned = [0]
 while [s for s in scanners if s not in aligned]:
     for s1 in aligned:
+        if s1 in scanned:
+            continue
         for s2 in scanners:
-            for cx, cy, cz in permutations(['x', 'y', 'z']):
+            for cx, cy, cz in permutations(('x', 'y', 'z')):
                 for sx, sy, sz in product((1, -1), (1, -1), (1, -1)):
                     if s2 in aligned:
                         break
@@ -41,6 +43,7 @@ while [s for s in scanners if s not in aligned]:
                         offsets.append(count[0][0])
                         scanners[s2] = [Beacon(sx*b[cx]+ox, sy*b[cy]+oy, sz*b[cz]+oz) for b in scanners[s2]]
                         aligned.append(s2)
+        scanned.append(s1)
 
 answer = max(sum([abs(x1-x2), abs(y1-y2), abs(z1-z2)])
             for x1, y1, z1 in offsets
