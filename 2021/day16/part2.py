@@ -1,5 +1,4 @@
 #!python
-# coding: future_fstrings
 """advent of code 2021 day 16 part 2"""
 from functools import reduce
 class Packet():
