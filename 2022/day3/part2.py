@@ -6,7 +6,7 @@ groups = zip(*(iter(sacks),) * 3)
 
 sum = 0
 for (s1, s2, s3) in groups:
-    item = [item for item in s1 if item in s2 if item in s3][0]
+    item = [item for item in s1 if item in s2 if item in s3].pop()
     if item.islower():
         sum += ord(item) - 96
     if item.isupper():

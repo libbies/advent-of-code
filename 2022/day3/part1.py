@@ -3,7 +3,7 @@
 rucksacks = [(set(_[:len(_)//2]), set(_[len(_)//2:])) for _ in open("input.txt").read().splitlines()]
 
 dupes = [
-    [item for item in sack[0] if item in sack[-1]][0]
+    [item for item in sack[0] if item in sack[-1]].pop()
     for sack in rucksacks
 ]
 
