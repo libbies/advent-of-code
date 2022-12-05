@@ -1,6 +1,6 @@
 #!python
 """advent of code 2022 day 3 part 2"""
-sacks = [set(_) for _ in open("input.txt").read().splitlines()]
+sacks = [set(l) for l in open("input.txt").read().splitlines()]
 
 groups = zip(*(iter(sacks),) * 3)
 

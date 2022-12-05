@@ -1,10 +1,13 @@
 #!python
 """advent of code 2022 day 3 part 1"""
-rucksacks = [(set(_[:len(_)//2]), set(_[len(_)//2:])) for _ in open("input.txt").read().splitlines()]
+sacks = [
+    (set(l[:len(l)//2]), set(l[len(l)//2:]))
+    for l in open("input.txt").read().splitlines()
+]
 
 dupes = [
     [item for item in sack[0] if item in sack[-1]].pop()
-    for sack in rucksacks
+    for sack in sacks
 ]
 
 sum = 0
