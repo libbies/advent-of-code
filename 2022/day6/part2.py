@@ -9,4 +9,4 @@ for i in range(len((data))):
         answer = i + 14
         break
 
-print("part 1:", answer)
+print("part 2:", answer)
