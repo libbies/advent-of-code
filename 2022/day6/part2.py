@@ -1,11 +1,9 @@
 #!python
 """advent of code 2022 day 6 part 2"""
-from collections import Counter
 data = open("input.txt").read().strip()
 
 for i in range(len((data))):
-    segment = data[i:i+14]
-    if max(Counter(segment).values()) == 1:
+    if len(set(data[i:i+14])) == 14:
         answer = i + 14
         break
 
