@@ -28,8 +28,8 @@ sizes = dict()
 def check_size(dir):
     size = 0
     for name, subdir in ((name,d) for (name,d) in dir.items() if type(d)==dict):
-        size += check_size(subdir)
         sizes[name] = check_size(subdir)
+        size += sizes[name]
     size += sum(f if type(f)==int else 0 for f in dir.values())
     return size
 
