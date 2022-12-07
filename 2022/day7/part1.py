@@ -7,35 +7,32 @@ root = dict()
 for line in lines:
     if line[0] == '$': # cmd
         if line[1] == "cd":
-            if line[-1] == '/':
+            if line[-1] == '/': # cd /
                 path = [ ]
-            elif line[-1] == "..":
+            elif line[-1] == "..": # cd ..
                 _ = path.pop()
-            else: # folder
+            else: # cd <dir>
                 path.append(line[-1])
+            cwd = root
+            for p in path:
+                cwd = cwd[p]
     elif line[0] == "dir": # directory
-        dir = root
-        for p in path:
-            dir = dir[p]
-        dir[line[1]] = dict()
+        cwd[line[1]] = dict()
     else: # file
-        dir = root
-        for p in path:
-            dir = dir[p]
-        dir[line[1]] = int(line[0])
+        cwd[line[1]] = int(line[0])
 
-def check_size(dir):
+def get_size(directory):
     size = 0
-    for subdir in (d for d in dir.values() if type(d)==dict):
-        size += check_size(subdir)
-    size += sum(f if type(f)==int else 0 for f in dir.values())
+    for subdir in (d for d in directory.values() if type(d)==dict):
+        size += get_size(subdir)
+    size += sum(f if type(f)==int else 0 for f in directory.values())
     return size
 
-def recurse_dirs(dir):
+def recurse_dirs(directory):
     size = 0
-    for subdir in (d for d in dir.values() if type(d)==dict):
-        if check_size(subdir) <= 100000:
-            size += check_size(subdir)
+    for subdir in (d for d in directory.values() if type(d)==dict):
+        if get_size(subdir) <= 100_000:
+            size += get_size(subdir)
         size += recurse_dirs(subdir)
     return size
 
