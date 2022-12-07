@@ -12,30 +12,25 @@ for line in lines:
             elif line[-1] == "..":
                 _ = path.pop()
             else: # folder
-                dir = root
-                for p in path:
-                    dir = dir[p]
                 path.append(line[-1])
     elif line[0] == "dir": # directory
         dir = root
         for p in path:
             dir = dir[p]
-        if line[1] not in dir:
-            dir[line[1]] = dict()
+        dir[line[1]] = dict()
     else: # file
         dir = root
         for p in path:
             dir = dir[p]
-        if line[1] not in dir:
-            dir[line[1]] = int(line[0])
+        dir[line[1]] = int(line[0])
 
 sizes = dict()
 def check_size(dir):
     size = 0
-    for name, subdir in [(k,v) for (k,v) in dir.items() if type(v)==dict]:
+    for name, subdir in ((name,d) for (name,d) in dir.items() if type(d)==dict):
         size += check_size(subdir)
         sizes[name] = check_size(subdir)
-    size += sum([_ if type(_)==int else 0 for _ in dir.values()])
+    size += sum(f if type(f)==int else 0 for f in dir.values())
     return size
 
 free_space = 70000000 - check_size(root)
