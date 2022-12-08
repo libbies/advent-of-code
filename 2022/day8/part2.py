@@ -1,5 +1,5 @@
 #!python
-"""advent of code 2022 day 8 part 1"""
+"""advent of code 2022 day 8 part 2"""
 trees = [list(map(int, line)) for line in open("input.txt").read().splitlines()]
 length = len(trees)
 
