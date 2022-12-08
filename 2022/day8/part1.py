@@ -4,30 +4,30 @@ trees = [list(map(int, line)) for line in open("input.txt").read().splitlines()]
 length = len(trees)
 seen = set()
 
-for y in range(length): # left -> right
+for y in range(length): # left to right of top edge
     tree = -1
-    for x in range(length): # down
+    for x in range(length): # top edge looking down
         if trees[x][y] > tree:
             seen.add((x,y))
             tree = trees[x][y]
 
-for y in range(length): # left -> right
+for y in range(length): # left to right of bottom edge
     tree = -1
-    for x in range(length-1, 0, -1): # up
+    for x in range(length-1, 0, -1): # bottom edge looking up
         if trees[x][y] > tree:
             seen.add((x,y))
             tree = trees[x][y]
 
-for x in range(length): # up -> down
+for x in range(length): # up to down of left edge
     tree = -1
-    for y in range(length): # right
+    for y in range(length): # left edge looking right
         if trees[x][y] > tree:
             seen.add((x,y))
             tree = trees[x][y]
 
-for x in range(length): # up -> down
+for x in range(length): # up to down of right edge
     tree = -1
-    for y in range(length-1, 0, -1): # left
+    for y in range(length-1, 0, -1): # right edge looking left
         if trees[x][y] > tree:
             seen.add((x,y))
             tree = trees[x][y]
