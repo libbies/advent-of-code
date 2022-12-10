@@ -1,6 +1,5 @@
 #!python
 """advent of code 2022 day 10 part 2"""
-from pprint import pprint
 lines = [line.split() for line in open("input.txt").read().splitlines()]
 
 cycle = 1
