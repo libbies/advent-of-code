@@ -4,14 +4,14 @@ from pprint import pprint
 lines = [line.split() for line in open("input.txt").read().splitlines()]
 
 cycle = 1
-registers = { 'X': 1 }
+registers = {'X': 1}
 display = [[' '] * 40 for _ in range(6)]
 for line in lines:
-    if line[0] == "noop":
+    if line[0]=="noop":
         if registers['X'] <= cycle%40 <= registers['X']+2:
             display[cycle//40][cycle%40] = '█'
         cycle += 1
-    elif line[0] == "addx":
+    elif line[0]=="addx":
         if registers['X'] <= cycle%40 <= registers['X']+2:
             display[cycle//40][cycle%40] = '█'
         cycle += 1
