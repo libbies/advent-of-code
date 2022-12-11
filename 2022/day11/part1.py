@@ -15,7 +15,7 @@ class Monkey():
         self.false = int(lines[5][-1])
         self.count = 0
     def __str__(self):
-        return f"monkey[{self.id}]: ({self.items}, {self.op}, {self.test}, {self.true}/{self.false})"
+        return f"monkeys[{self.id}]: ({self.items}, {self.op}, {self.test}, {self.true}/{self.false})"
 
 monkeys = dict()
 for monkey in data:
