@@ -24,7 +24,7 @@ for start in starts:
     visited = set()
     points = {start}
     answer = 0
-    while end not in points:
+    while points and end not in points:
         answer += 1
         if answers and answer > min(answers):
             break
@@ -42,6 +42,7 @@ for start in starts:
                 new.add((x, y-1, hmap[x][y-1]))
             visited.add((x, y, h))
         points = new
-    answers.add(answer)
+    if points:
+        answers.add(answer)
 
 print("part 2:", min(answers))
