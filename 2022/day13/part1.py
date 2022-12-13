@@ -15,8 +15,7 @@ def compare(left, right):
     elif type(left)==list and type(right)==int:
         return compare(left, [right])
     elif type(left)==list and type(right)==list:
-        l = min(len(left), len(right))
-        for i in range(l):
+        for i in range(min(len(left), len(right))):
             if compare(left[i], right[i]) is not None:
                 return compare(left[i], right[i])
         if len(left) < len(right):
