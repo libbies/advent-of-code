@@ -42,7 +42,8 @@ while True:
         drop(500, 0)
         answer += 1
     except StopIteration:
-        pprint()
         break
+
+pprint()
 
 print("part 1:", answer)
