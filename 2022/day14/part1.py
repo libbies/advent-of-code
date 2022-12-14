@@ -25,7 +25,7 @@ for rocks in lines:
 
 def drop(x, y):
     if y > max_y:
-        raise StopIteration
+        raise SystemExit
     if grid[y+1][x-1]!=' ' and grid[y+1][x]!=' ' and grid[y+1][x+1]!=' ':
         grid[y][x] = 'o'
         return
@@ -41,7 +41,7 @@ while True:
     try:
         drop(500, 0)
         answer += 1
-    except StopIteration:
+    except SystemExit:
         break
 
 pprint()
