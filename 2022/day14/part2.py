@@ -29,9 +29,9 @@ def drop(x, y):
     if grid[y+1][x-1]!=' ' and grid[y+1][x]!=' ' and grid[y+1][x+1]!=' ':
         grid[y][x] = 'o'
         return
-    elif grid[y+1][x+1]==' ' and grid[y+1][x-1]!=' ' and grid[y+1][x]!=' ':
+    elif grid[y+1][x+1]==' ':
         return drop(x+1, y+1)
-    elif grid[y+1][x-1]==' ' and grid[y+1][x]!=' ':
+    elif grid[y+1][x-1]==' ':
         return drop(x-1, y+1)
     elif grid[y+1][x]==' ':
         return drop(x, y+1)
