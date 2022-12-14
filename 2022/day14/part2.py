@@ -37,11 +37,10 @@ def drop(x, y):
         return drop(x, y+1)
 
 answer = 0
-while True:
+while grid[0][500]!="o":
     drop(500, 0)
     answer += 1
-    if grid[0][500] == "o":
-        pprint()
-        break
+
+pprint()
 
 print("part 2:", answer)
