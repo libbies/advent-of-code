@@ -10,7 +10,15 @@ sensors = list()
 for sx, sy, bx, by in lines:
     sensors.append((sx, sy, abs(sx - bx) + abs(sy - by)))
 
+# remove sensors that are completely inside the range of another sensor
 sensors.sort(key=lambda x:-x[-1])
+for sx, sy, sdist in sensors.copy():
+    for tx, ty, tdist in sensors.copy():
+        if abs(tx-sx) + abs(ty-sy) < tdist and tdist > 2*sdist:
+            sensors.remove((sx, sy, sdist))
+            break
+
+# check if (x, y) is in the range of any sensor
 def check(x, y):
     if not 0 < x < 4_000_000 or not 0 < y < 4_000_000:
         return False
@@ -19,7 +27,9 @@ def check(x, y):
             return False
     return True
 
+# check all points that are just outside of range from (x,y)
 def iterate(x, y, dist):
+    dist += 1
     for d in range(dist):
         for dx in (d, -d):
             for dy in (dist-d, -(dist-d)):
@@ -28,7 +38,7 @@ def iterate(x, y, dist):
     return 0
 
 for sx, sy, distance in reversed(sensors):
-    answer = iterate(sx, sy, distance+1)
+    answer = iterate(sx, sy, distance)
     if answer:
         break
 
