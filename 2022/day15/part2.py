@@ -18,7 +18,7 @@ for sx, sy, sdist in sensors.copy():
             sensors.remove((sx, sy, sdist))
             break
 
-# check if (x, y) is in the range of any sensor
+# check if (x, y) is not in the range of any sensor
 def check(x, y):
     if not 0 < x < 4_000_000 or not 0 < y < 4_000_000:
         return False
