@@ -6,10 +6,6 @@ lines = [
     for line in open("input.txt").read().splitlines()
 ]
 
-beacons = set()
-for _, _, bx, by in lines:
-    beacons.add((bx, by))
-
 sensors = list()
 for sx, sy, bx, by in lines:
     sensors.append((sx, sy, abs(sx - bx) + abs(sy - by)))
