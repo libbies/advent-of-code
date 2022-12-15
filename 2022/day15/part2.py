@@ -10,31 +10,26 @@ sensors = list()
 for sx, sy, bx, by in lines:
     sensors.append((sx, sy, abs(sx - bx) + abs(sy - by)))
 
+bound = 4_000_000
 sensors.sort(key=lambda x:-x[-1])
 def check(x, y):
-    if not (0 < x < 4_000_000) or not (0 < y < 4_000_000):
+    if not 0 < x < bound or not 0 < y < bound:
         return False
-    for dx, dy, distance in sensors:
-        if abs(dx - x) + abs(dy - y) < distance:
+    for dx, dy, dist in sensors:
+        if abs(dx - x) + abs(dy - y) < dist:
             return False
     return True
 
-answer = 0
-for sx, sy, dist in reversed(sensors):
-    dist = dist + 1
+def iterate(x, y, dist):
     for d in range(dist):
-        if check(sx+d, sy+dist-d):
-            answer = (sx+d) * 4_000_000 + (sy+dist-d)
-            break
-        if check(sx+d, sy-dist+d):
-            answer = (sx+d) * 4_000_000 + (sy-dist+d)
-            break
-        if check(sx-d, sy-dist+d):
-            answer = (sx-d) * 4_000_000 + (sy-dist+d)
-            break
-        if check(sx-d, sy+dist-d):
-            answer = (sx-d) * 4_000_000 + (sy+dist-d)
-            break
+        for dx in (d, -d):
+            for dy in (dist-d, -(dist-d)):
+                if check(x+dx, y+dy):
+                    return (x+dx) * bound + (y+dy)
+    return 0
+
+for sx, sy, distance in reversed(sensors):
+    answer = iterate(sx, sy, distance+1)
     if answer:
         break
 
