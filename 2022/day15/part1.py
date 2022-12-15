@@ -10,24 +10,14 @@ beacons = set()
 for _, _, bx, by in lines:
     beacons.add((bx, by))
 
-positions = list()
-
+positions = set()
 target = 2_000_000
-for line in lines:
-    sx, sy, bx, by = line
+for sx, sy, bx, by in lines:
     distance = abs(sx - bx) + abs(sy - by)
-    height = abs(sy - target)
-    if height > distance:
-        continue
-    positions.append((sx-distance+height, sx+distance-height))
+    dx = abs(sy - target)
+    dy = distance - dx
+    positions.update(range(sx-dy, sx+dy+1))
 
-left = min(_[0] for _ in positions)
-right = max(_[1] for _ in positions)
-
-row = [0 for _ in range(left, right+1)]
-for l, r in positions:
-    row[l+abs(left):r+abs(left)+1] = [1 for _ in range(l, r+1)]
-
-answer = sum(row) - sum(1 for b in beacons if b[-1]==2000000)
+answer = len(positions) - sum(1 for b in beacons if b[-1]==target)
 
 print("part 1:", answer)
