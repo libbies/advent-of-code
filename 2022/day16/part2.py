@@ -27,7 +27,7 @@ def search(room, unopened, minutes, elephant):
     for valve in unopened:
         if tunnels[room,valve] < minutes:
             flow = max(flow,
-                search("AA", unopened, 26, False) if elephant and minutes<13 else 0,
+                search("AA", unopened, 26, False) if (elephant and minutes<13) else 0,
                 search(valve, tuple(v for v in unopened if v!=valve),
                        minutes-tunnels[room,valve]-1, elephant)
                     + (minutes-tunnels[room,valve]-1) * valves[valve]
