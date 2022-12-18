@@ -90,7 +90,7 @@ while cursor < 1_000_000_000_000:
     # 11 here works for both my puzzle input and the example pattern
     # len(input) % len(example) -> 11
     mod = 11
-    # this may need to be adjusted, either use 0, or calculate per above
+    # this may need to be adjusted, either use 0, or try the above
     if jet_count%len_jets==mod:
         heights[cursor%5].append((cursor, height+len(grid)))
     if jet_count%len_jets==mod and len(heights[cursor%5])%2==1 and len(heights[cursor%5])>=2:
