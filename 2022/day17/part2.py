@@ -66,7 +66,7 @@ def move_right():
                 grid[i][j+1], grid[i][j] = '@', '.'
 
 height = 0
-def stop():
+def cleanup():
     global grid, height
     for line in grid:
         if '@' not in line:
@@ -127,7 +127,7 @@ while cursor < 1_000_000_000_000:
                 move_right()
             else:
                 move_left()
-    stop()
+    cleanup()
     cursor += 1
 
 answer = height + len(grid)
