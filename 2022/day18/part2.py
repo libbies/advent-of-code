@@ -13,15 +13,17 @@ for x, y, z in ((0,0,0), (0,0,l), (0,0,0), (0,l,0), (0,0,0), (l,0,0)):
     grid[x,y,z] = -1
 
 finished = False
+visited = set()
 while not finished:
     finished = True
     for (x,y,z), value in grid.copy().items():
-        if value!=-1 or not (-1<=x<=l+1 and -1<=y<=l+1 and -1<=z<=l+1):
+        if (x,y,z) in visited or value!=-1 or not (-1<=x<=l+1 and -1<=y<=l+1 and -1<=z<=l+1):
             continue
         for i, j, k in ((0,0,1), (0,0,-1), (0,1,0), (0,-1,0), (1,0,0), (-1,0,0)):
             if not grid[x+i,y+j,z+k]:
                 grid[x+i,y+j,z+k] = -1
                 finished = False
+        visited.add((x,y,z))
 
 answer = 0
 for (x,y,z), value in grid.copy().items():
