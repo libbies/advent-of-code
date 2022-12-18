@@ -2,7 +2,7 @@
 """advent of code 2022 day 17 part 2"""
 from itertools import cycle
 
-jets = open("example.txt").read().strip()
+jets = open("input.txt").read().strip()
 len_jets = len(jets)
 jets = cycle(jets)
 grid = []
