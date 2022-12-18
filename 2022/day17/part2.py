@@ -1,5 +1,6 @@
 #!python
 """advent of code 2022 day 17 part 2"""
+import code
 from itertools import cycle
 
 jets = open("input.txt").read().strip()
@@ -84,20 +85,18 @@ def cleanup():
         grid = grid[-limit:]
         height += l - limit
 
-history = dict()
-pheight = height
+heights = {n:[] for n in range(5)}
 cursor = 0
-cycle = 0
 while cursor < 1_000_000_000_000:
-    if not cycle:
-        key = (tuple(tuple(line) for line in grid[-limit:]), cursor%5, jet_count%len_jets)
-        if key in history:
-            prev_cursor, prev_height = history[key]
+    if jet_count%len_jets==0:
+        heights[cursor%5].append((cursor, height+len(grid)))
+    if jet_count%len_jets==0 and len(heights[cursor%5])%2==1 and len(heights[cursor%5])>=2:
+        diffs = [y[-1]-x[-1] for (x,y) in zip(heights[cursor%5], heights[cursor%5][1:])]
+        if diffs[:len(diffs)//2]==diffs[len(diffs)//2:]:
+            prev_cursor, prev_height = heights[cursor%5][0]
             cycle = cursor - prev_cursor
             height += ((1_000_000_000_000-cursor)//cycle * (height+len(grid)-prev_height))
             cursor = 1_000_000_000_000 - ((1_000_000_000_000-cursor)%cycle)
-        else:
-            history[key] = (cursor, height+len(grid))
     grid += [['.' for _ in range(7)] for _ in range(4)]
     shape = shapes[cursor%5]
     while shape:
