@@ -87,9 +87,11 @@ def cleanup():
 heights = {n:[] for n in range(5)}
 cursor = 0
 while cursor < 1_000_000_000_000:
-    if jet_count%len_jets==0:
+    # 11 here works for both the example and the puzzle input
+    # len(input_jets) % len(example_jets) = 11
+    if jet_count%len_jets==11:
         heights[cursor%5].append((cursor, height+len(grid)))
-    if jet_count%len_jets==0 and len(heights[cursor%5])%2==1 and len(heights[cursor%5])>=2:
+    if jet_count%len_jets==11 and len(heights[cursor%5])%2==1 and len(heights[cursor%5])>=2:
         diffs = [y[-1]-x[-1] for (x,y) in zip(heights[cursor%5], heights[cursor%5][1:])]
         if diffs[:len(diffs)//2]==diffs[len(diffs)//2:]:
             prev_cursor, prev_height = heights[cursor%5][0]
