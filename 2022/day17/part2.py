@@ -127,8 +127,8 @@ while cursor < 1_000_000_000_000:
                 move_right()
             else:
                 move_left()
-    cleanup()
     cursor += 1
+    cleanup()
 
 answer = height + len(grid)
 
