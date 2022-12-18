@@ -2,7 +2,7 @@
 """advent of code 2022 day 17 part 2"""
 from itertools import cycle
 
-jets = open("input.txt").read().strip()
+jets = open("example.txt").read().strip()
 len_jets = len(jets)
 jets = cycle(jets)
 grid = []
@@ -88,11 +88,12 @@ heights = {n:[] for n in range(5)}
 cursor = 0
 while cursor < 1_000_000_000_000:
     # 11 here works for both my puzzle input and the example pattern
-    # len(input) % len(example) --> 11
+    # len(input) % len(example) -> 11
+    mod = 11
     # this may need to be adjusted, either use 0, or calculate per above
-    if jet_count%len_jets==11:
+    if jet_count%len_jets==mod:
         heights[cursor%5].append((cursor, height+len(grid)))
-    if jet_count%len_jets==11 and len(heights[cursor%5])%2==1 and len(heights[cursor%5])>=2:
+    if jet_count%len_jets==mod and len(heights[cursor%5])%2==1 and len(heights[cursor%5])>=2:
         diffs = [y[-1]-x[-1] for (x,y) in zip(heights[cursor%5], heights[cursor%5][1:])]
         if diffs[:len(diffs)//2]==diffs[len(diffs)//2:]:
             prev_cursor, prev_height = heights[cursor%5][0]
