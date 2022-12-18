@@ -6,7 +6,7 @@ jet = cycle(open("input.txt").read().strip())
 grid = []
 shapes = ['-', '+', 'L', 'I', 'o']
 cursor = 0
-
+limit = 10 # lol
 
 def pprint(lines=100):
     print('\n'.join('║'+''.join(line)+'║' for line in grid[-lines:][::-1])+"\n╚═══════╝")
@@ -44,7 +44,7 @@ def move_left():
                 grid[i][j-1], grid[i][j] = '@', '.'
 
 def move_right():
-    for i, line in enumerate(grid):
+    for line in grid:
         if '@' not in line:
             continue
         for j, char in enumerate(line):
@@ -58,7 +58,9 @@ def move_right():
             if grid[i][j]=='@':
                 grid[i][j+1], grid[i][j] = '@', '.'
 
+height = 0
 def stop():
+    global grid, height
     for line in grid:
         if '@' not in line:
             continue
@@ -67,6 +69,13 @@ def stop():
                 line[j] = '#'
     while '#' not in grid[-1]:
         _ = grid.pop()
+    if len(grid) > 2*limit:
+        # ensure that there's always a '#' block to land on
+        if not all('#' in [l[n] for l in grid[-limit:]] for n in range(7)):
+            return
+        l = len(grid)
+        grid = grid[-limit:]
+        height += l - limit
 
 while cursor < 2022:
     grid += [['.' for _ in range(7)] for _ in range(4)]
@@ -101,6 +110,6 @@ while cursor < 2022:
         stop()
         cursor += 1
 
-answer = len(grid)
+answer = height + len(grid)
 
 print("part 1:", answer)
