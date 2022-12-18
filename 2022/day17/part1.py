@@ -107,8 +107,8 @@ while cursor < 2022:
                 move_right()
             else:
                 move_left()
-        stop()
-        cursor += 1
+    stop()
+    cursor += 1
 
 answer = height + len(grid)
 
