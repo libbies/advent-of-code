@@ -1,6 +1,5 @@
 #!python
 """advent of code 2022 day 17 part 2"""
-import code
 from itertools import cycle
 
 jets = open("input.txt").read().strip()
