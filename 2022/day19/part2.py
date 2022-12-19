@@ -48,7 +48,7 @@ def iterate(minutes, costs, robots, mats):
     elif cost(mats, obsidian) and limit(robots, costs, 2):
         geodes = max(geodes,
                      iterate(minutes-1, costs, add(robots,(0,0,1,0)), add(sub(mats,obsidian),robots)))
-    elif cost(mats, clay) and limit(robots, costs, 1) and limit(robots, costs, 2):
+    if cost(mats, clay) and limit(robots, costs, 1) and limit(robots, costs, 2):
         geodes = max(geodes,
                      iterate(minutes-1, costs, add(robots,(0,1,0,0)), add(sub(mats,clay),robots)))
     if cost(mats, ore) and limit(robots, costs, 0) and limit(robots, costs, 1) \
@@ -63,7 +63,9 @@ def iterate(minutes, costs, robots, mats):
 answer = 1
 for id, (ore, clay, obsidian, geode) in blueprints.items():
     best = 0
-    answer *= iterate(32, (ore, clay, obsidian, geode), (1, 0, 0, 0), (0, 0, 0, 0))
+    quality = iterate(32, (ore, clay, obsidian, geode), (1, 0, 0, 0), (0, 0, 0, 0))
+    print(id, quality)
+    answer *= quality
 
 print("add:", add.cache_info())
 print("sub:", sub.cache_info())
