@@ -38,7 +38,7 @@ best = 0
 @functools.cache
 def iterate(minutes, costs, robots, mats):
     global best
-    if minutes<=1 or best > mats[-1] + minutes*robots[-1] + sum(range(minutes)):
+    if minutes<=1 or best>=mats[-1] + minutes*robots[-1] + sum(range(minutes)):
         return mats[-1] + minutes*robots[-1]
     geodes = 0
     if cost(mats, geode):
