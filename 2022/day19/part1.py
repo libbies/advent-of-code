@@ -25,8 +25,9 @@ def sub(a, b):
     return (i-m, j-n, k-o, l-p)
 
 @functools.cache
-def cost(mats, mat):
-    return all(c>=0 for c in sub(mats, mat))
+def cost(mats, robot):
+    """check if there are enough mats for the cost of a robot"""
+    return all(c>=0 for c in sub(mats, robot))
 
 @functools.cache
 def limit(robots, costs, index):
