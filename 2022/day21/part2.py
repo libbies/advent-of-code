@@ -8,7 +8,7 @@ for line in lines:
     line[0] = line[0][:-1]
     for s in line:
         if type(s)==str and len(s)==4 and not s.isnumeric():
-            exec(f"{s} = z3.Real('{s}')")
+            vars()[s] = z3.Real(s)
     if line[0] == "humn":
         continue
     elif line[0] == "root":
