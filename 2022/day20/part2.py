@@ -10,9 +10,9 @@ for _ in range(10): # lolwat
         j = indexes.index(i)
         dst = (j+n)%(l-1)
         _ = indexes.pop(j)
-        m = answers.pop(j)
+        _ = answers.pop(j)
         indexes.insert(dst, i)
-        answers.insert(dst, m)
+        answers.insert(dst, n)
 
 answer = sum([
     answers[(answers.index(0)+1000)%l],
