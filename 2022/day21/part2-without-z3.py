@@ -33,23 +33,19 @@ while not finished:
             lines.remove(line)
             finished = False
 
-finished = False
-while not finished:
-    for i, (m0, m1, op, m3) in enumerate(lines.copy()):
-        if m1 in monkeys:
-            lines[i][1]=monkeys[m1]
-        elif m3 in monkeys:
-            lines[i][3]=monkeys[m3]
-        elif m1 in monkeys and m3 in monkeys:
-            lines[i][1]=monkeys[m1]
-            lines[i][3]=monkeys[m3]
-            monkeys[m0] = eval(''.join(map(str,[m1, op, m3])))
-            lines.remove(line)
-        elif type(m1) in (int, float) and type(m3) in (int,float):
-            monkeys[m0] = eval(''.join(map(str,[m1, op, m3])))
-            lines.remove(line)
-        else:
-            finished = True
+for i, (m0, m1, op, m3) in enumerate(lines.copy()):
+    if m1 in monkeys:
+        lines[i][1]=monkeys[m1]
+    elif m3 in monkeys:
+        lines[i][3]=monkeys[m3]
+    elif m1 in monkeys and m3 in monkeys:
+        lines[i][1]=monkeys[m1]
+        lines[i][3]=monkeys[m3]
+        monkeys[m0] = eval(''.join(map(str,[m1, op, m3])))
+        lines.remove(line)
+    elif type(m1) in (int, float) and type(m3) in (int,float):
+        monkeys[m0] = eval(''.join(map(str,[m1, op, m3])))
+        lines.remove(line)
 
 root = [line for line in lines if line[0]=="root"].pop()
 equation = [line for line in lines if line[0]==root[1]]
