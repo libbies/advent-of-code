@@ -35,18 +35,18 @@ while not finished:
 
 finished = False
 while not finished:
-    for i, line in enumerate(lines.copy()):
-        if line[1] in monkeys:
-            lines[i][1]=monkeys[line[1]]
-        elif line[3] in monkeys:
-            lines[i][3]=monkeys[line[3]]
-        elif line[1] in monkeys and line[3] in monkeys:
-            lines[i][1]=monkeys[line[1]]
-            lines[i][3]=monkeys[line[3]]
-            monkeys[line[0]] = eval(''.join(map(str,line[1:4])))
+    for i, (m0, m1, op, m3) in enumerate(lines.copy()):
+        if m1 in monkeys:
+            lines[i][1]=monkeys[m1]
+        elif m3 in monkeys:
+            lines[i][3]=monkeys[m3]
+        elif m1 in monkeys and m3 in monkeys:
+            lines[i][1]=monkeys[m1]
+            lines[i][3]=monkeys[m3]
+            monkeys[m0] = eval(''.join(map(str,[m1, op, m3])))
             lines.remove(line)
-        elif type(line[1]) in (int, float) and type(line[3]) in (int,float):
-            monkeys[line[0]] = eval(''.join(map(str,line[1:4])))
+        elif type(m1) in (int, float) and type(m3) in (int,float):
+            monkeys[m0] = eval(''.join(map(str,[m1, op, m3])))
             lines.remove(line)
         else:
             finished = True
