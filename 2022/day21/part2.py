@@ -16,7 +16,7 @@ for line in lines:
     else:
         solver.add(eval(f"{line[0]}==" + ''.join(line[1:])))
 
-solver.check()
-answer = solver.model()[humn]
+assert solver.check()==z3.sat
+answer = solver.model().eval(humn)
 
 print("part 2:", answer)
