@@ -12,9 +12,9 @@ for line in lines:
     if line[0] == "humn":
         continue
     elif line[0] == "root":
-        solver.add(eval(''.join([line[1], "==", line[-1]])))
+        solver.add(eval(f"{line[1]}=={line[-1]}"))
     else:
-        solver.add(eval(''.join([line[0], "=="] + line[1:])))
+        solver.add(eval(f"{line[0]}==" + ''.join(line[1:])))
 
 solver.check()
 answer = solver.model()[humn]
