@@ -3,18 +3,12 @@
 import z3
 lines = [line.split() for line in open("input.txt").read().splitlines()]
 
+solver = z3.Solver()
 for line in lines:
     line[0] = line[0][:-1]
-
-for line in lines:
     for s in line:
         if type(s)==str and len(s)==4 and not s.isnumeric():
             exec(f"{s} = z3.Real('{s}')")
-
-root = z3.Real("root")
-humn = z3.Real("humn")
-solver = z3.Solver()
-for line in lines:
     if line[0] == "humn":
         continue
     elif line[0] == "root":
