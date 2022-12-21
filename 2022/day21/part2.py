@@ -11,7 +11,7 @@ for line in lines:
             vars()[s] = z3.Real(s)
     if line[0] == "humn":
         continue
-    elif line[0] == "root":
+    if line[0] == "root":
         solver.add(eval(f"{line[1]}=={line[-1]}"))
     else:
         solver.add(eval(f"{line[0]}==" + ''.join(line[1:])))
