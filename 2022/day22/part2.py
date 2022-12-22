@@ -88,8 +88,6 @@ def find_next(point, face):
         # 5, v, v, x=0, y=100-149
         x, y = 0, y + 100
         face += 0
-    if (x,y) in dead:
-        raise StopIteration
     if grid[x][y]=="#":
         return (False, None)
     else:
@@ -99,7 +97,6 @@ x, y = 0, grid[0].index('.')
 dirs = [">", "v", "<", "^"]
 facing = 0
 for step, turn in steps:
-    # print(step, turn)
     for s in range(int(step)):
         if facing%4==0: # >
             if grid[x][(y+1)%max_y] == '#':
@@ -128,7 +125,7 @@ for step, turn in steps:
                 x = (x+1)%max_x
             grid[x][y] = "v"
         elif facing%4==2: # <
-            if grid[x][(y-1)%max_y] == '#': # here
+            if grid[x][(y-1)%max_y] == '#':
                 break
             elif (x, (y-1)%max_y) in dead:
                 point, face = find_next((x,y), facing)
@@ -157,13 +154,9 @@ for step, turn in steps:
         facing += 1
     elif turn=="L":
         facing -= 1
-    else:
-        pass
-        # pprint()
-
-
+    #else:
+    #    pprint()
 
 answer = ((x+1)*1000)+((y+1)*4)+(facing%4)
 
 print("part 2:", answer)
-# code.interact(local=dict(globals(), **locals()))
