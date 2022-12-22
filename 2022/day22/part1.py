@@ -1,6 +1,6 @@
 #!python
 """advent of code 2022 day 22 part 1"""
-import re, time, code
+import re
 filename = "input.txt"
 grid = [list(line) for line in open(filename).read().splitlines() if "." in line]
 max_x = len(grid)
@@ -29,7 +29,6 @@ steps = re.findall("([0-9]+)(L|R)", steps) \
 
 def find_next(point, facing):
     x, y = point
-    # print("fn", point, facing, facing%4, (x,y) in dead)
     init = True
     while (x, y) in dead or init:
         init = False
@@ -37,7 +36,6 @@ def find_next(point, facing):
             y = (y+1)%max_y
         if facing%4==1:
             x = (x+1)%max_x
-            # print("fn", (x,y), facing)
         if facing%4==2:
             y = (y-1)%max_y
         if facing%4==3:
@@ -51,7 +49,6 @@ x, y = 0, grid[0].index('.')
 dirs = [">", "v", "<", "^"]
 facing = 0
 for step, turn in steps:
-    # print(step, turn)
     for s in range(int(step)):
         if facing%4==0: # >
             if grid[x][(y+1)%max_y] == '#':
@@ -69,10 +66,8 @@ for step, turn in steps:
             if grid[(x+1)%max_x][y] == '#':
                 break
             elif ((x+1)%max_x, y) in dead:
-                # print(x, y, facing)
                 point = find_next((x,y), facing)
                 if point:
-                    # print("point", point)
                     x, y = point
                 else:
                     break
@@ -80,7 +75,7 @@ for step, turn in steps:
                 x = (x+1)%max_x
             grid[x][y] = "v"
         if facing%4==2: # <
-            if grid[x][(y-1)%max_y] == '#': # here
+            if grid[x][(y-1)%max_y] == '#':
                 break
             elif (x, (y-1)%max_y) in dead:
                 point = find_next((x,y), facing)
@@ -107,9 +102,8 @@ for step, turn in steps:
         facing += 1
     elif turn=="L":
         facing -= 1
-    else:
-        pass
-        #pprint()
+    #else:
+    #    pprint()
     if facing%4==0:
         grid[x][y] = ">"
     if facing%4==1:
@@ -118,7 +112,6 @@ for step, turn in steps:
         grid[x][y] = "<"
     if facing%4==3:
         grid[x][y] = "^"
-
 
 answer = ((x+1)*1000)+((y+1)*4)+(facing%4)
 
