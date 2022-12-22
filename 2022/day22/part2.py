@@ -1,6 +1,6 @@
 #!python
 """advent of code 2022 day 22 part 2"""
-import re, time, code, os
+import re
 filename = "input.txt"
 grid = [line for line in open(filename).read().splitlines() if "." in line]
 max_x = len(grid)
