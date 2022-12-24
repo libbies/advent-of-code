@@ -26,7 +26,8 @@ for round in range(10):
     tmp = dict()
     copy = grid.copy()
     for (x,y), value in grid.items():
-        if all(not copy[x+i,y+j] for (i,j) in ((-1,-1), (-1,0), (-1,1), (0,-1), (0, 1), (1,-1), (1,0), (1,1))):
+        if all(not copy[x+i,y+j]
+               for (i,j) in ((-1,-1), (-1,0), (-1,1), (0,-1), (0, 1), (1,-1), (1,0), (1,1))):
             pass
         elif all(not copy[eval(dirq[(dir+0)%4])] for i in (-1, 0, 1)):
             tmp[x,y] = eval(dirs[(dir+0)%4])
