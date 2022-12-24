@@ -1,7 +1,6 @@
 #!python
 """advent of code 2022 day 24 part 1"""
 from copy import deepcopy
-from collections import defaultdict
 grid = [[[c] for c in line] for line in open("input.txt").read().splitlines()]
 empty = [[c if c[0]=='#' else [] for c in line] for line in grid]
 
@@ -14,7 +13,7 @@ max_y = len(grid[0])
 start = (0, grid[0].index(['.']))
 end = (max_x-1, grid[-1].index(['.']))
 
-moves = defaultdict(lambda: 0, {start: 1})
+moves = {start}
 
 round = 0
 while end not in moves:
@@ -36,16 +35,13 @@ while end not in moves:
                     if x==1: tmp[max_x-2][y].append("^")
                     else:        tmp[x-1][y].append("^")
     grid = deepcopy(tmp)
-    for (x,y), move in moves.copy().items():
-        for m,n in [(-1,0), (1,0), (0, -1), (0, 1), (0,0)]:
+    for (x,y) in moves.copy():
+        for m,n in [(-1,0), (1,0), (0,-1), (0,1), (0,0)]:
             if (x+m,y+n) in (start,end) or (1<=x+m<=max_x-2 and 1<=y+n<=max_y-2):
                 if grid[x+m][y+n]==[]:
-                    moves[x+m,y+n] = round
-                else:
-                    try:
-                        del moves[x+m,y+n]
-                    except:
-                        pass
+                    moves.add((x+m,y+n))
+                elif (x+m,y+n) in moves:
+                    moves.remove((x+m,y+n))
     # pprint(tmp)
     # print(round, len(moves), max(moves))
 
