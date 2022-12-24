@@ -14,10 +14,9 @@ start = (0, grid[0].index(['.']))
 end = (max_x-1, grid[-1].index(['.']))
 
 moves = {start}
-
-round = 0
+minute = 0
 while end not in moves:
-    round += 1
+    minute += 1
     tmp = deepcopy(empty)
     for x, line in enumerate(grid):
         for y, blizzards in enumerate(line):
@@ -34,16 +33,16 @@ while end not in moves:
                 if b=="^":
                     if x==1: tmp[max_x-2][y].append("^")
                     else:        tmp[x-1][y].append("^")
-    grid = deepcopy(tmp)
+    grid = tmp
     for (x,y) in moves.copy():
-        for m,n in [(-1,0), (1,0), (0,-1), (0,1), (0,0)]:
+        for m,n in ((-1,0), (1,0), (0,-1), (0,1), (0,0)):
             if (x+m,y+n) in (start,end) or (1<=x+m<=max_x-2 and 1<=y+n<=max_y-2):
                 if grid[x+m][y+n]==[]:
                     moves.add((x+m,y+n))
                 elif (x+m,y+n) in moves:
                     moves.remove((x+m,y+n))
     # pprint(tmp)
-    # print(round, len(moves), max(moves))
+    # print(minute, len(moves), max(moves))
 
-answer = round
+answer = minute
 print("part 1:", answer)
