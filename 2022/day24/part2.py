@@ -14,97 +14,37 @@ start = (0, grid[0].index(['.']))
 end = (max_x-1, grid[-1].index(['.']))
 
 round = 0
-moves = {start}
-while end not in moves:
-    round += 1
-    tmp = deepcopy(empty)
-    for x, line in enumerate(grid):
-        for y, blizzards in enumerate(line):
-            for b in blizzards:
-                if b==">":
-                    if y==max_y-2: tmp[x][1].append(">")
-                    else:        tmp[x][y+1].append(">")
-                if b=="<":
-                    if y==1: tmp[x][max_y-2].append("<")
-                    else:        tmp[x][y-1].append("<")
-                if b=="v":
-                    if x==max_x-2: tmp[1][y].append("v")
-                    else:        tmp[x+1][y].append("v")
-                if b=="^":
-                    if x==1: tmp[max_x-2][y].append("^")
-                    else:        tmp[x-1][y].append("^")
-    grid = deepcopy(tmp)
-    for (x,y) in moves.copy():
-        for m,n in [(-1,0), (1,0), (0,-1), (0,1), (0,0)]:
-            if (x+m,y+n) in (start,end) or (1<=x+m<=max_x-2 and 1<=y+n<=max_y-2):
-                if grid[x+m][y+n]==[]:
-                    moves.add((x+m,y+n))
-                elif (x+m,y+n) in moves:
-                    moves.remove((x+m,y+n))
-    # pprint(tmp)
-    # print(round, len(moves), max(moves))
-
-start, end = end, start
-moves = {start}
-while end not in moves:
-    round += 1
-    tmp = deepcopy(empty)
-    for x, line in enumerate(grid):
-        for y, blizzards in enumerate(line):
-            for b in blizzards:
-                if b==">":
-                    if y==max_y-2: tmp[x][1].append(">")
-                    else:        tmp[x][y+1].append(">")
-                if b=="<":
-                    if y==1: tmp[x][max_y-2].append("<")
-                    else:        tmp[x][y-1].append("<")
-                if b=="v":
-                    if x==max_x-2: tmp[1][y].append("v")
-                    else:        tmp[x+1][y].append("v")
-                if b=="^":
-                    if x==1: tmp[max_x-2][y].append("^")
-                    else:        tmp[x-1][y].append("^")
-    grid = deepcopy(tmp)
-    for (x,y) in moves.copy():
-        for m,n in [(-1,0), (1,0), (0,-1), (0,1), (0,0)]:
-            if (x+m,y+n) in (start,end) or (1<=x+m<=max_x-2 and 1<=y+n<=max_y-2):
-                if grid[x+m][y+n]==[]:
-                    moves.add((x+m,y+n))
-                elif (x+m,y+n) in moves:
-                    moves.remove((x+m,y+n))
-    # pprint(tmp)
-    # print(round, len(moves), min(moves))
-
-start, end = end, start
-moves = {start}
-while end not in moves:
-    round += 1
-    tmp = deepcopy(empty)
-    for x, line in enumerate(grid):
-        for y, blizzards in enumerate(line):
-            for b in blizzards:
-                if b==">":
-                    if y==max_y-2: tmp[x][1].append(">")
-                    else:        tmp[x][y+1].append(">")
-                if b=="<":
-                    if y==1: tmp[x][max_y-2].append("<")
-                    else:        tmp[x][y-1].append("<")
-                if b=="v":
-                    if x==max_x-2: tmp[1][y].append("v")
-                    else:        tmp[x+1][y].append("v")
-                if b=="^":
-                    if x==1: tmp[max_x-2][y].append("^")
-                    else:        tmp[x-1][y].append("^")
-    grid = deepcopy(tmp)
-    for (x,y) in moves.copy():
-        for m,n in [(-1,0), (1,0), (0,-1), (0,1), (0,0)]:
-            if (x+m,y+n) in (start,end) or (1<=x+m<=max_x-2 and 1<=y+n<=max_y-2):
-                if grid[x+m][y+n]==[]:
-                    moves.add((x+m,y+n))
-                elif (x+m,y+n) in moves:
-                    moves.remove((x+m,y+n))
-    # pprint(tmp)
-    # print(round, len(moves), max(moves))
+for _ in range(3):
+    moves = {start}
+    while end not in moves:
+        round += 1
+        tmp = deepcopy(empty)
+        for x, line in enumerate(grid):
+            for y, blizzards in enumerate(line):
+                for b in blizzards:
+                    if b==">":
+                        if y==max_y-2: tmp[x][1].append(">")
+                        else:        tmp[x][y+1].append(">")
+                    if b=="<":
+                        if y==1: tmp[x][max_y-2].append("<")
+                        else:        tmp[x][y-1].append("<")
+                    if b=="v":
+                        if x==max_x-2: tmp[1][y].append("v")
+                        else:        tmp[x+1][y].append("v")
+                    if b=="^":
+                        if x==1: tmp[max_x-2][y].append("^")
+                        else:        tmp[x-1][y].append("^")
+        grid = deepcopy(tmp)
+        for (x,y) in moves.copy():
+            for m,n in [(-1,0), (1,0), (0,-1), (0,1), (0,0)]:
+                if (x+m,y+n) in (start,end) or (1<=x+m<=max_x-2 and 1<=y+n<=max_y-2):
+                    if grid[x+m][y+n]==[]:
+                        moves.add((x+m,y+n))
+                    elif (x+m,y+n) in moves:
+                        moves.remove((x+m,y+n))
+        # pprint(tmp)
+        # print(round, len(moves), max(moves))
+    start, end = end, start
 
 answer = round
 print("part 2:", answer)
