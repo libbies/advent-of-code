@@ -6,9 +6,13 @@ for n, line in enumerate(lines):
     tmp = list(line)
     while True:
         line = ''.join(tmp)
-        match = [[line.index(s), n] for n, s in enumerate([
-            "zero", "one", "two", "three", "four",
-            "five", "six", "seven", "eight", "nine"]) if s in line]
+        match = [
+            [line.index(s), n]
+            for n, s in enumerate([
+                "zero", "one", "two", "three", "four",
+                "five", "six", "seven", "eight", "nine"])
+            if s in line
+        ]
         if not match:
             break
         i, number = min(match)
