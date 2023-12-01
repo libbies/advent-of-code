@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """advent of code 2023 day 1 part 2"""
-import re
 lines = open("input.txt").read().splitlines()
 
 for n, line in enumerate(lines):
