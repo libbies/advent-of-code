@@ -7,7 +7,7 @@ for n, line in enumerate(lines):
     while True:
         line = ''.join(tmp)
         match = [
-            [line.index(s), n]
+            (line.index(s), n)
             for n, s in enumerate([
                 "zero", "one", "two", "three", "four",
                 "five", "six", "seven", "eight", "nine"])
