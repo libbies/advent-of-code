@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """advent of code 2023 day 1 part 1"""
-lines = open("input.txt").read().splitlines()
+lines = open("input.txt").readlines()
 
 numbers = [[n for n in line if n.isnumeric()] for line in lines]
 
