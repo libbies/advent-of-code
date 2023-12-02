@@ -12,9 +12,9 @@ for line in lines:
             n = int(n)
             if color=="red":
                 r = max(n, r)
-            if color=="green":
+            elif color=="green":
                 g = max(n, g)
-            if color=="blue":
+            elif color=="blue":
                 b = max(n, b)
     answer += r * g * b
 
