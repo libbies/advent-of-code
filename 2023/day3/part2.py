@@ -27,25 +27,25 @@ for i, line in enumerate(lines):
         if c == '.' or c.isnumeric():
             continue
         parts = []
-        if i!=0:
+        if i>0:
             if lines[i-1][j].isnumeric():
                 parts.append(numbers[i-1,j])
             else:
-                if j!=0 and lines[i-1][j-1].isnumeric():
+                if j>0 and lines[i-1][j-1].isnumeric():
                     parts.append(numbers[i-1,j-1])
-                if j!=max_x and lines[i-1][j+1].isnumeric():
+                if j<max_y and lines[i-1][j+1].isnumeric():
                     parts.append(numbers[i-1,j+1])
-        if i!=max_x:
+        if i<max_x:
             if lines[i+1][j].isnumeric():
                 parts.append(numbers[i+1,j])
             else:
-                if j!=0 and lines[i+1][j-1].isnumeric():
+                if j>0 and lines[i+1][j-1].isnumeric():
                     parts.append(numbers[i+1,j-1])
-                if j!=max_x and lines[i+1][j+1].isnumeric():
+                if j<max_y and lines[i+1][j+1].isnumeric():
                     parts.append(numbers[i+1,j+1])
-        if line[j-1].isnumeric():
+        if j>0 and line[j-1].isnumeric():
             parts.append(numbers[i,j-1])
-        if line[j+1].isnumeric():
+        if j<max_y and line[j+1].isnumeric():
             parts.append(numbers[i,j+1])
         if len(parts)==2:
             answer += parts[0] * parts[-1]
