@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """advent of code 2023 day 3 part 2"""
+from math import prod
 lines = [tuple(l) for l in open("input.txt").read().splitlines()]
 
 max_x, max_y = len(lines), len(lines[0])
@@ -26,28 +27,14 @@ for i, line in enumerate(lines):
     for j, c in enumerate(line):
         if c == '.' or c.isnumeric():
             continue
-        parts = []
-        if i>0:
-            if lines[i-1][j].isnumeric():
-                parts.append(numbers[i-1,j])
-            else:
-                if j>0 and lines[i-1][j-1].isnumeric():
-                    parts.append(numbers[i-1,j-1])
-                if j<max_y and lines[i-1][j+1].isnumeric():
-                    parts.append(numbers[i-1,j+1])
-        if i<max_x:
-            if lines[i+1][j].isnumeric():
-                parts.append(numbers[i+1,j])
-            else:
-                if j>0 and lines[i+1][j-1].isnumeric():
-                    parts.append(numbers[i+1,j-1])
-                if j<max_y and lines[i+1][j+1].isnumeric():
-                    parts.append(numbers[i+1,j+1])
-        if j>0 and line[j-1].isnumeric():
-            parts.append(numbers[i,j-1])
-        if j<max_y and line[j+1].isnumeric():
-            parts.append(numbers[i,j+1])
+        parts = set()
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                try:
+                    parts.add(numbers[i+dx,j+dy])
+                except KeyError:
+                    continue
         if len(parts)==2:
-            answer += parts[0] * parts[-1]
+            answer += prod(parts)
 
 print("aoc 2023 day 3 part 2:", answer)

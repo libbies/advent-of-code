@@ -26,25 +26,14 @@ for i, line in enumerate(lines):
     for j, c in enumerate(line):
         if c == '.' or c.isnumeric():
             continue
-        if i>0:
-            if lines[i-1][j].isnumeric():
-                answer += numbers[i-1,j]
-            else:
-                if j>0 and lines[i-1][j-1].isnumeric():
-                    answer += numbers[i-1,j-1]
-                if j<max_y and lines[i-1][j+1].isnumeric():
-                    answer += numbers[i-1,j+1]
-        if i<max_x:
-            if lines[i+1][j].isnumeric():
-                answer += numbers[i+1,j]
-            else:
-                if j>0 and lines[i+1][j-1].isnumeric():
-                    answer += numbers[i+1,j-1]
-                if j<max_y and lines[i+1][j+1].isnumeric():
-                    answer += numbers[i+1,j+1]
-        if j>0 and line[j-1].isnumeric():
-            answer += numbers[i,j-1]
-        if j<max_y and line[j+1].isnumeric():
-            answer += numbers[i,j+1]
+        parts = set()
+        for dx in (-1, 0, 1):
+            for dy in (-1, 0, 1):
+                try:
+                    parts.add(numbers[i+dx,j+dy])
+                except KeyError:
+                    continue
+        answer += sum(parts)
+
 
 print("aoc 2023 day 3 part 1:", answer)
