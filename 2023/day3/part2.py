@@ -25,7 +25,7 @@ for i, line in enumerate(lines):
 answer = 0
 for i, line in enumerate(lines):
     for j, c in enumerate(line):
-        if c == '.' or c.isnumeric():
+        if c!='*':
             continue
         parts = set()
         for dx in (-1, 0, 1):
