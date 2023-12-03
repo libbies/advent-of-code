@@ -35,5 +35,4 @@ for i, line in enumerate(lines):
                     continue
         answer += sum(parts)
 
-
 print("aoc 2023 day 3 part 1:", answer)
