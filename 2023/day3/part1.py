@@ -26,25 +26,25 @@ for i, line in enumerate(lines):
     for j, c in enumerate(line):
         if c == '.' or c.isnumeric():
             continue
-        if i!=0:
+        if i>0:
             if lines[i-1][j].isnumeric():
                 answer += numbers[i-1,j]
             else:
-                if j!=0 and lines[i-1][j-1].isnumeric():
+                if j>0 and lines[i-1][j-1].isnumeric():
                     answer += numbers[i-1,j-1]
-                if j!=max_x and lines[i-1][j+1].isnumeric():
+                if j<max_y and lines[i-1][j+1].isnumeric():
                     answer += numbers[i-1,j+1]
-        if i!=max_x:
+        if i<max_x:
             if lines[i+1][j].isnumeric():
                 answer += numbers[i+1,j]
             else:
-                if j!=0 and lines[i+1][j-1].isnumeric():
+                if j>0 and lines[i+1][j-1].isnumeric():
                     answer += numbers[i+1,j-1]
-                if j!=max_x and lines[i+1][j+1].isnumeric():
+                if j<max_y and lines[i+1][j+1].isnumeric():
                     answer += numbers[i+1,j+1]
-        if line[j-1].isnumeric():
+        if j>0 and line[j-1].isnumeric():
             answer += numbers[i,j-1]
-        if line[j+1].isnumeric():
+        if j<max_y and line[j+1].isnumeric():
             answer += numbers[i,j+1]
 
 print("aoc 2023 day 3 part 1:", answer)
