@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """advent of code 2023 day 4 part 2"""
 import re
-lines = [re.split(r"( \| |: )", l) for l in open("input.txt").read().splitlines()]
+lines = (re.split(r"( \| |: )", l) for l in open("input.txt").read().splitlines())
 
 class Card:
     pass
@@ -11,8 +11,8 @@ for c, _, numbers, _, winners in lines:
     cid = int(c.split()[-1])
     cards[cid] = Card()
     cards[cid].points = sum(
-        1 for c in [int(_) for _ in numbers.split()]
-           if c in [int(_) for _ in winners.split()]
+        1 for c in (int(_) for _ in numbers.split())
+           if c in (int(_) for _ in winners.split())
     )
     cards[cid].value = 0
 
