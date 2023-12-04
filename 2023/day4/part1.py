@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """advent of code 2023 day 4 part 1"""
 import re
-lines = [re.split("( \| |: )", l) for l in open("input.txt").read().splitlines()]
+lines = (re.split("( \| |: )", l) for l in open("input.txt").read().splitlines())
 
 answer = 0
 for card, _, numbers, _, winners in lines:
