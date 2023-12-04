@@ -10,12 +10,11 @@ cards = dict()
 for c, _, numbers, _, winners in lines:
     cid = int(c.split()[-1])
     cards[cid] = Card()
-    cards[cid].cid = cid
     cards[cid].points = sum(
         1 for c in [int(_) for _ in numbers.split()]
            if c in [int(_) for _ in winners.split()]
     )
-    cards[cid].value = None
+    cards[cid].value = 0
 
 max_c = max(cards.keys())
 for cid, card in sorted(cards.items(), reverse=True):
