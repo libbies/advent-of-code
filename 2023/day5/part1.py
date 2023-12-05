@@ -11,7 +11,7 @@ for line in lines[1:]:
     for dstaddr, srcaddr, length in [map(int, l.split()) for l in line[1:]]:
         maps[src,dst].append((range(srcaddr, srcaddr+length), dstaddr-srcaddr))
 
-answer = float('inf')
+answer = max(seeds)
 for seed in seeds:
     src, dst = "seed", None
     while src!="location":
