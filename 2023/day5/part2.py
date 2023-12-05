@@ -9,8 +9,8 @@ for line in lines[1:]:
     line = line.splitlines()
     src, _, dst = line[0].split()[0].split('-')
     maps[src,dst] = list()
-    for dstaddr, srcaddr, delta in [map(int, l.split()) for l in line[1:]]:
-        maps[src,dst].append((range(srcaddr, srcaddr+delta), dstaddr-srcaddr))
+    for dstaddr, srcaddr, length in [map(int, l.split()) for l in line[1:]]:
+        maps[src,dst].append((range(srcaddr, srcaddr+length), dstaddr-srcaddr))
 
 seeds = {"seed": [range(a,a+b) for a,b in zip(seeds, seeds[1:])][::2] }
 for (src, dst) in maps.keys():
@@ -28,8 +28,8 @@ for (src, dst) in maps.keys():
                 queue.append(range(d.stop, s.stop))
                 break
             if s.start not in d and s.stop-1 in d:
-                seeds[dst].append(range(d.start+delta, s.stop+delta))
                 queue.append(range(s.start, d.start))
+                seeds[dst].append(range(d.start+delta, s.stop+delta))
                 break
             if d.start in s and d.stop-1 in s:
                 queue.append(range(s.start, d.start))
