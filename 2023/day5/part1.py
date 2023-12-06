@@ -13,9 +13,8 @@ for line in lines[1:]:
 
 answer = max(seeds)
 for seed in seeds:
-    for (src, dst) in maps.keys():
-        ranges = maps[src,dst]
-        for mapping, delta in ranges:
+    for m in maps:
+        for mapping, delta in maps[m]:
             if seed in mapping:
                 seed += delta
                 break

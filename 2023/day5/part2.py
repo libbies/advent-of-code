@@ -13,7 +13,7 @@ for line in lines[1:]:
         maps[src,dst].append((range(srcaddr, srcaddr+length), dstaddr-srcaddr))
 
 seeds = {"seed": [range(a,a+b) for a,b in zip(seeds, seeds[1:])][::2] }
-for (src, dst) in maps.keys():
+for src, dst in maps:
     seeds[dst] = list()
     queue = seeds[src]
     while queue:
