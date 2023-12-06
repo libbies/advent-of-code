@@ -15,11 +15,10 @@ for line in lines[1:]:
 seeds = {"seed": [range(a,a+b) for a,b in zip(seeds, seeds[1:])][::2] }
 for (src, dst) in maps.keys():
     seeds[dst] = list()
-    ranges = [v for k,v in maps.items() if k[0]==src][0]
     queue = seeds[src]
     while queue:
         s = queue.pop()
-        for d, delta in ranges:
+        for d, delta in maps[src,dst]:
             if s.start in d and s.stop-1 in d:
                 seeds[dst].append(range(s.start+delta, s.stop+delta))
                 break
