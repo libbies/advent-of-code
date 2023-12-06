@@ -3,7 +3,7 @@
 lines = open("input.txt").read().split("\n\n")
 
 seeds = [*map(int, lines[0].split()[1:])]
-
+seeds = {"seed": [range(seed,seed+len) for seed,len in zip(seeds[::2], seeds[1::2])]}
 maps = dict()
 for line in lines[1:]:
     line = line.splitlines()
@@ -12,7 +12,6 @@ for line in lines[1:]:
     for dstaddr, srcaddr, length in [map(int, l.split()) for l in line[1:]]:
         maps[src,dst].append((range(srcaddr, srcaddr+length), dstaddr-srcaddr))
 
-seeds = {"seed": [range(a,a+b) for a,b in zip(seeds, seeds[1:])][::2] }
 for src, dst in maps:
     seeds[dst] = list()
     queue = seeds[src]
