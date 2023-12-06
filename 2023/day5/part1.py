@@ -13,14 +13,12 @@ for line in lines[1:]:
 
 answer = max(seeds)
 for seed in seeds:
-    src, dst = "seed", None
-    while src!="location":
-        dst, ranges = [(k[-1],v) for k,v in maps.items() if k[0]==src][0]
+    for (src, dst) in maps.keys():
+        ranges = maps[src,dst]
         for mapping, delta in ranges:
             if seed in mapping:
-                seed = seed + delta
+                seed += delta
                 break
-        src, dst = dst, None
     if seed < answer:
         answer = seed
 
