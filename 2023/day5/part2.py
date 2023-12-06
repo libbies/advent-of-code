@@ -8,12 +8,12 @@ maps = dict()
 for line in lines[1:]:
     line = line.splitlines()
     src, _, dst = line[0].split()[0].split('-')
-    maps[src,dst] = list()
+    maps[src,dst] = []
     for dstaddr, srcaddr, length in [map(int, l.split()) for l in line[1:]]:
         maps[src,dst].append((range(srcaddr, srcaddr+length), dstaddr-srcaddr))
 
 for src, dst in maps:
-    seeds[dst] = list()
+    seeds[dst] = []
     queue = seeds[src]
     while queue:
         s = queue.pop()
