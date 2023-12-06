@@ -12,6 +12,8 @@ for line in lines[1:]:
     for dstaddr, srcaddr, length in [map(int, l.split()) for l in line[1:]]:
         maps[src,dst].append((range(srcaddr, srcaddr+length), dstaddr-srcaddr))
 
+# i track ranges of numbers instead of the seeds themselves, which are numerous
+# and split them up into new ranges as needed
 for src, dst in maps:
     seeds[dst] = []
     queue = seeds[src]
