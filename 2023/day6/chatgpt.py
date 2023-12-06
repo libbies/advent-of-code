@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """advent of code 2023 day 6 part 2
-... after I asked chatgpt to speed up my solution"""
+...after I gave chatgpt my solution and asked it to speed it up"""
 
 def find_valid_n_range(time, distance):
     # Solve the quadratic inequality -n^2 + time*n > distance
