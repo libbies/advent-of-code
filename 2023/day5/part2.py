@@ -3,7 +3,7 @@
 lines = open("input.txt").read().split("\n\n")
 
 seeds = [*map(int, lines[0].split()[1:])]
-seeds = {"seed": [range(seed,seed+len) for seed,len in zip(seeds[::2], seeds[1::2])]}
+seeds = {"seed": [range(s,s+len) for s,len in zip(seeds[::2], seeds[1::2])]}
 maps = dict()
 for line in lines[1:]:
     line = line.splitlines()
