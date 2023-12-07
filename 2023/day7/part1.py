@@ -30,10 +30,10 @@ for hand, bid in lines:
     else:
         hands["zero"].append((hand, bid))
 
-answer, rank = 0, 1
+answer, rank = 0, 0
 for hand in ("zero", "one", "two", "three", "full", "four", "five"):
     for _, bid in sorted(hands[hand]):
-        answer += rank * int(bid)
         rank += 1
+        answer += rank * int(bid)
 
 print("aoc 2023 day 7 part 1:", answer)

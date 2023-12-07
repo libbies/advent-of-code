@@ -14,14 +14,12 @@ translation = {
 hands = defaultdict(list)
 for hand, bid in lines:
     hand = hand.translate(translation)
+    count = Counter(hand)
     if "0" in hand and hand!="00000":
-        count = Counter(hand)
         max_count = max(v for k,v in count.items() if k!="0")
         count = Counter(hand.replace("0",
             sorted(k for k,v in count.items() if v==max_count)[-1]
         ))
-    else:
-        count = Counter(hand)
     if 5 in count.values():
         hands["five"].append((hand, bid))
     elif 4 in count.values():
@@ -37,10 +35,10 @@ for hand, bid in lines:
     else:
         hands["zero"].append((hand, bid))
 
-answer, rank = 0, 1
+answer, rank = 0, 0
 for hand in ("zero", "one", "two", "three", "full", "four", "five"):
     for _, bid in sorted(hands[hand]):
-        answer += rank * int(bid)
         rank += 1
+        answer += rank * int(bid)
 
 print("aoc 2023 day 7 part 2:", answer)
