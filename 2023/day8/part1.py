@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 """advent of code 2023 day 8 part 1"""
-import re
+from re import findall
 lines = open("input.txt").readlines()
 
 dirs = lines[0].strip()
 network = dict()
 for line in lines[2:]:
-    node, l, r = re.findall(r"[A-Z]+", line)
+    node, l, r = findall(r"[A-Z]+", line)
     network[node] = (l, r)
 
 step = 0
