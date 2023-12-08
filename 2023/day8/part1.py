@@ -6,7 +6,7 @@ lines = open("input.txt").readlines()
 dirs = lines[0].strip()
 network = dict()
 for line in lines[2:]:
-    node, l, r, _ = re.split(r"[^A-Z]+", line)
+    node, l, r = re.findall(r"[A-Z]+", line)
     network[node] = (l, r)
 
 step = 0
