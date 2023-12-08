@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """advent of code 2023 day 8 part 2"""
-import re
+from re import findall
 from math import lcm
 
 lines = open("input.txt").readlines()
@@ -8,7 +8,7 @@ lines = open("input.txt").readlines()
 dirs = lines[0].strip()
 network = dict()
 for line in lines[2:]:
-    node, l, r = re.findall(r"[A-Z12]+", line)
+    node, l, r = findall(r"[A-Z12]+", line)
     network[node] = (l, r)
 
 step = 0
