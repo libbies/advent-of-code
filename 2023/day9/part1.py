@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """advent of code 2023 day 9 part 1"""
-from functools import reduce
 lines = (map(int,l.split()) for l in open("input.txt").readlines())
 
 class History(list):

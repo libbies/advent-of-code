@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """advent of code 2023 day 9 part 2"""
-from functools import reduce
 from collections import deque
 lines = (map(int,l.split()) for l in open("input.txt").readlines())
 
