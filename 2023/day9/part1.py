@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 """advent of code 2023 day 9 part 1"""
+from itertools import pairwise
 lines = (map(int,l.split()) for l in open("input.txt").readlines())
 
 class History(list):
@@ -9,7 +10,7 @@ answer = 0
 for line in lines:
     hist = History(line)
     while any(hist):
-        hist.next = History(b-a for b,a in zip(hist[1:], hist))
+        hist.next = History(b-a for a,b in pairwise(hist))
         hist.next.prev = hist
         hist = hist.next
     while hist.prev:

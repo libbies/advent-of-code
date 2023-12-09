@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 """advent of code 2023 day 9 part 2"""
 from collections import deque
+from itertools import pairwise
 lines = (map(int,l.split()) for l in open("input.txt").readlines())
 
 class History(deque):
@@ -10,7 +11,7 @@ answer = 0
 for line in lines:
     hist = History(line)
     while any(hist):
-        hist.next = History(value-hist[i-1] for i, value in enumerate(hist) if i>0)
+        hist.next = History(b-a for a,b in pairwise(hist))
         hist.next.prev = hist
         hist = hist.next
     while hist.prev:
