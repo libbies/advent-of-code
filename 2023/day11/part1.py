@@ -6,7 +6,7 @@ lines = [list(l.strip()) for l in open("input.txt").readlines()]
 universe = list()
 empty_cols = list(range(len(lines[0])))
 for row in lines:
-    if all(c=='.' for c in row):
+    if '#' not in row:
         universe.append(row.copy())
     universe.append(row)
     for i, char in enumerate(row):
@@ -25,7 +25,6 @@ for i, row in enumerate(universe):
 
 answer = 0
 for g1, g2 in combinations(galaxies, 2):
-    distance = abs(g1[0]-g2[0]) + abs(g1[-1]-g2[-1])
-    answer += distance
+    answer += abs(g1[0]-g2[0]) + abs(g1[-1]-g2[-1])
 
 print("aoc 2023 day 11 part 1:", answer)

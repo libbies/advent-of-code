@@ -11,13 +11,13 @@ for i, row in enumerate(lines):
         empty_rows.remove(i)
     universe.append(row)
     for j, char in enumerate(row):
-        if j in empty_cols and char!=".":
+        if j in empty_cols and char!='.':
             empty_cols.remove(j)
 
-galaxies = []
+galaxies = list()
 for i, row in enumerate(universe):
     for j, char in enumerate(row):
-        if char=="#":
+        if char=='#':
             galaxies.append((i,j))
 
 answer = 0
