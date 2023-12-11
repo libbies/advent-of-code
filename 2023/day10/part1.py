@@ -10,23 +10,20 @@ class Node(str):
 
 nodes = list()
 for row, line in enumerate(lines):
-    tmp = []
-    for pipe in line.strip():
-        tmp.append(Node(pipe))
-    for col, node in enumerate(tmp):
+    line = [Node(c) for c in line.strip()]
+    for col, node in enumerate(line):
         if node=='S':
-            start = (row, col)
-        if col!=len(tmp)-1:
-            node.right = tmp[col+1]
+            start = node
+        if col!=len(line)-1:
+            node.right = line[col+1]
         if col!=0:
-            node.left = tmp[col-1]
+            node.left = line[col-1]
         if row!=0:
             node.up = nodes[row-1][col]
             nodes[row-1][col].down = node
-    nodes.append(tmp)
+    nodes.append(line)
 
-queue = deque()
-queue.append(nodes[start[0]][start[-1]])
+queue = deque((start,))
 while queue:
     node = queue.popleft()
     if node=='F':
