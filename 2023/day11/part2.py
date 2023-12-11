@@ -4,6 +4,7 @@ from itertools import combinations
 lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
 universe = list()
+galaxies = list()
 empty_rows = list(range(len(lines)))
 empty_cols = list(range(len(lines[0])))
 for i, row in enumerate(lines):
@@ -11,14 +12,10 @@ for i, row in enumerate(lines):
         empty_rows.remove(i)
     universe.append(row)
     for j, char in enumerate(row):
-        if j in empty_cols and char!='.':
-            empty_cols.remove(j)
-
-galaxies = list()
-for i, row in enumerate(universe):
-    for j, char in enumerate(row):
         if char=='#':
             galaxies.append((i,j))
+            if j in empty_cols:
+                empty_cols.remove(j)
 
 answer = 0
 for g1, g2 in combinations(galaxies, 2):

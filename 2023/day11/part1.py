@@ -8,16 +8,17 @@ empty_cols = list(range(len(lines[0])))
 for row in lines:
     if '#' not in row:
         universe.append(row.copy())
+    else:
+        for i, char in enumerate(row):
+            if i in empty_cols and char!='.':
+                empty_cols.remove(i)
     universe.append(row)
-    for i, char in enumerate(row):
-        if i in empty_cols and char!='.':
-            empty_cols.remove(i)
 
 for row in universe:
     for j in reversed(empty_cols):
         row.insert(j, '.')
 
-galaxies = []
+galaxies = list()
 for i, row in enumerate(universe):
     for j, char in enumerate(row):
         if char=='#':
