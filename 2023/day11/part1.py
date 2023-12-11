@@ -1,12 +1,11 @@
 #!/usr/bin/env python
 """advent of code 2023 day 11 part 1"""
 from itertools import combinations
-lines = open("input.txt").readlines()
+lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
 universe = list()
 empty_cols = list(range(len(lines[0])))
 for row in lines:
-    row = list(row.strip())
     if all(c=='.' for c in row):
         universe.append(row.copy())
     universe.append(row)
