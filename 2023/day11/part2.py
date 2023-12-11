@@ -1,13 +1,12 @@
 #!/usr/bin/env python
-"""advent of code 2023 day 1 part 1"""
+"""advent of code 2023 day 11 part 2"""
 from itertools import combinations
-lines = open("input.txt").read().splitlines()
+lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
 universe = list()
 empty_rows = list(range(len(lines)))
 empty_cols = list(range(len(lines[0])))
 for i, row in enumerate(lines):
-    row = list(row)
     if i in empty_rows and '#' in row:
         empty_rows.remove(i)
     universe.append(row)
@@ -32,4 +31,4 @@ for g1, g2 in combinations(galaxies, 2):
             distance += 999_999
     answer += distance
 
-print(answer)
+print("aoc 2023 day 11 part 2:", answer)
