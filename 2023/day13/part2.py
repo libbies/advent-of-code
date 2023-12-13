@@ -3,9 +3,9 @@
 grids = (grid.splitlines() for grid in open("input.txt").read().split('\n\n'))
 
 answer = 0
-for i, grid in enumerate(grids):
+for grid in grids:
     # horizontal
-    for l in range(1,len(grid[0])):
+    for l in range(1, len(grid[0])):
         differences = 0
         for row in grid:
             differences += sum(a!=b for a,b in zip(row[:l][l-len(row):], row[l:][:l][::-1]))
