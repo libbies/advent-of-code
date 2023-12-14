@@ -12,30 +12,31 @@ def load(lines):
 
 dirs = ('N', 'W', 'S', 'E')
 grids = dict()
+empty = deque()
 answer, turn = 0, 0
 while not answer:
     turn += 1
     direction = dirs[(turn-1)%4]
     if direction in ('N', 'S'):
         for col in range(length):
-            empty = deque()
+            empty.clear()
             for row in range(len(lines))[::-1 if direction=='S' else 1]:
                 if lines[row][col] == '.':
                     empty.append(row)
                 elif lines[row][col] == '#':
-                    empty = deque()
+                    empty.clear()
                 elif lines[row][col] == 'O' and empty:
                     lines[empty.popleft()][col] = 'O'
                     lines[row][col] = '.'
                     empty.append(row)
     if direction in ('W', 'E'):
         for row in range(len(lines)):
-            empty = deque()
+            empty.clear()
             for col in range(length)[::-1 if direction=='E' else 1]:
                 if lines[row][col] == '.':
                     empty.append(col)
                 elif lines[row][col] == '#':
-                    empty = deque()
+                    empty.clear()
                 elif lines[row][col] == 'O' and empty:
                     lines[row][empty.popleft()] = 'O'
                     lines[row][col] = '.'

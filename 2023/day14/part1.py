@@ -3,13 +3,14 @@
 from collections import deque
 lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
+empty = deque()
 for col in range(len(lines)):
-    empty = deque()
+    empty.clear()
     for row in range(len(lines)):
         if lines[row][col] == '.':
             empty.append(row)
         elif lines[row][col] == '#':
-            empty = deque()
+            empty.clear()
         elif lines[row][col] == 'O' and empty:
             lines[empty.popleft()][col] = 'O'
             lines[row][col] = '.'
