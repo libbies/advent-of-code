@@ -20,7 +20,7 @@ while not answer:
     if direction in ('N', 'S'):
         for col in range(length):
             empty.clear()
-            for row in range(len(lines))[::-1 if direction=='S' else 1]:
+            for row in range(length)[::-1 if direction=='S' else 1]:
                 if lines[row][col] == '.':
                     empty.append(row)
                 elif lines[row][col] == '#':
@@ -30,7 +30,7 @@ while not answer:
                     lines[row][col] = '.'
                     empty.append(row)
     if direction in ('W', 'E'):
-        for row in range(len(lines)):
+        for row in range(length):
             empty.clear()
             for col in range(length)[::-1 if direction=='E' else 1]:
                 if lines[row][col] == '.':
