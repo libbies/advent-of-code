@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 """advent of code 2023 day 14 part 2"""
 from collections import deque
+lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
+length = len(lines)
 def load(lines):
     l = 0
     for i, row in enumerate(lines):
-        l += row.count('O') * (len(lines) - i)
+        l += row.count('O') * (length - i)
     return l
 
-lines = [list(l.strip()) for l in open("input.txt").readlines()]
-length = len(lines)
 dirs = ('N', 'W', 'S', 'E')
 grids = dict()
 answer, turn = 0, 0
@@ -41,8 +41,7 @@ while not answer:
                     lines[row][col] = '.'
                     empty.append(col)
         if direction == 'E':
-            grid = ''.join(''.join(l) for l in lines)
-            if grid in grids:
+            if (grid := ''.join(''.join(l) for l in lines)) in grids:
                 if (4_000_000_000 - turn) % (turn - grids[grid]) == 0:
                     answer = load(lines)
             grids[grid] = turn
