@@ -4,12 +4,6 @@ from collections import deque
 lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
 length = len(lines)
-def load(lines):
-    l = 0
-    for i, row in enumerate(lines):
-        l += row.count('O') * (length - i)
-    return l
-
 dirs = ('N', 'W', 'S', 'E')
 grids = dict()
 empty = deque()
@@ -44,7 +38,8 @@ while not answer:
         if direction == 'E':
             if (grid := ''.join(''.join(l) for l in lines)) in grids:
                 if (4_000_000_000 - turn) % (turn - grids[grid]) == 0:
-                    answer = load(lines)
+                    for i, row in enumerate(lines):
+                        answer += row.count('O') * (length - i)
             grids[grid] = turn
 
 print("aoc 2023 day 14 part 2:", answer)
