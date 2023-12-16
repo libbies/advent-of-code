@@ -50,12 +50,3 @@ for start in starts:
     answer = max(answer, sum(sum(row) for row in visited))
 
 print("aoc 2023 day 16 part 2:", answer)
-
-
-
-
-
-
-
-
-#
