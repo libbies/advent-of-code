@@ -5,10 +5,10 @@ maxlen = len(lines)
 
 starts = list()
 for n in range(maxlen):
-    starts.append((n, -1, "R"))
-    starts.append((-1, n, "D"))
-    starts.append((n, maxlen, "L"))
-    starts.append((maxlen, n, "U"))
+    starts.extend([
+        (n, -1, "R"), (n, maxlen, "L"),
+        (-1, n, "D"), (maxlen, n, "U"),
+    ])
 
 answer = 0
 queue = list()
@@ -34,7 +34,7 @@ for start in starts:
                     queue.append((row, n, 'D' if direction=='R' else 'U'))
                 case _:
                     queue.append((row, n, 'R' if direction=='R' else 'L'))
-        if (direction=='D' and row+1<maxlen) or (direction=='U' and row-1>=0):
+        elif (direction=='D' and row+1<maxlen) or (direction=='U' and row-1>=0):
             n = row+1 if direction=='D' else row-1
             visited[n][col] = 1
             match lines[n][col]:

@@ -24,7 +24,7 @@ while queue:
                 queue.append((row, n, 'D' if direction=='R' else 'U'))
             case _:
                 queue.append((row, n, 'R' if direction=='R' else 'L'))
-    if (direction=='D' and row+1<maxlen) or (direction=='U' and row-1>=0):
+    elif (direction=='D' and row+1<maxlen) or (direction=='U' and row-1>=0):
         n = row+1 if direction=='D' else row-1
         visited[n][col] = 1
         match lines[n][col]:
