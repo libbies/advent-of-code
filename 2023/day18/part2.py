@@ -39,11 +39,10 @@ answer = 1 # i do not fully understand why the answer is off by one :(
 prev = rows[0]
 for n in rows[1:]:
     cols = sorted(dig[1] for dig in digs if n in dig[0] and isinstance(dig[1], int))
-    cols = [range(a,b+1) for a,b in pairwise(cols)]
     ranges = [dig[1] for dig in digs if n==dig[0].start and isinstance(dig[1], range)]
-    distance = sum(len(range) for range in cols)
+    distance = sum(b-a+1 for a,b in pairwise(cols))
     for r in ranges:
-        if any((r.start+r.stop)//2 in col for col in cols):
+        if any(a<(r.start+r.stop)//2<b for a,b in pairwise(cols)):
             continue
         distance += len(r)
     answer += distance*(n-prev)
