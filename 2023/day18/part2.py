@@ -26,15 +26,14 @@ for _, _, color in lines:
     if direction == "D":
         digs.append((range(row, row+distance), col))
         row += distance
-    # range(row, row-1) is an awful hack lol
     if direction == "L":
-        digs.append((range(row, row-1), range(col-distance, col)))
+        digs.append((range(row, row), range(col-distance, col)))
         col -= distance
     if direction == "R":
-        digs.append((range(row, row-1), range(col, col+distance)))
+        digs.append((range(row, row), range(col, col+distance)))
         col += distance
 
-rows = sorted({dig[0].start for dig in digs} | {dig[0].stop for dig in digs})
+rows = sorted({dig[0].start for dig in digs} | {dig[0].stop-1 for dig in digs})
 
 answer = 1 # i do not fully understand why the answer is off by one :(
 prev = rows[0]
