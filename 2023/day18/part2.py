@@ -43,7 +43,7 @@ for n in rows[1:]:
     cols = sorted(dig[1] for dig in digs if n in dig[0] if isinstance(dig[1], int))
     ranges = [dig[1] for dig in digs if n==dig[0].start if isinstance(dig[1], range)]
     if not ranges:
-        distance = sum(1+b-a for a,b in pairwise(cols))
+        distance = sum(b-a+1 for a,b in pairwise(cols))
     elif not cols:
         distance = sum(len(range) for range in ranges)
     else:
