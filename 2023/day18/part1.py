@@ -30,15 +30,13 @@ max_row = max(row for (row,col) in digs.keys())
 max_col = max(col for (row,col) in digs.keys())
 
 grid = [['.'] * (3+max_col-min_col) for n in range(3+max_row-min_row)]
-
 for row, col in digs:
     grid[1+row-min_row][1+col-min_col] = '#'
 
-queue = deque()
-queue.append((0,0))
-
 max_row = len(grid)
 max_col = len(grid[0])
+queue = deque()
+queue.append((0,0))
 while queue:
     row, col = queue.pop()
     grid[row][col] = ' '
@@ -50,7 +48,5 @@ while queue:
         if grid[row+x][col+y]=='.':
             queue.append((row+x, col+y))
 
-
 answer = sum(row.count('#') for row in grid) + sum(row.count('.') for row in grid)
-
 print("aoc 2023 day 18 part 1:", answer)
