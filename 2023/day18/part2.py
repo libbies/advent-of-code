@@ -39,20 +39,14 @@ rows = sorted({dig[0].start for dig in digs} | {dig[0].stop for dig in digs})
 answer = 1 # i do not fully understand why the answer is off by one :(
 prev = rows[0]
 for n in rows[1:]:
-    distance = 0
-    cols = sorted(dig[1] for dig in digs if n in dig[0] if isinstance(dig[1], int))
-    ranges = [dig[1] for dig in digs if n==dig[0].start if isinstance(dig[1], range)]
-    if not ranges:
-        distance = sum(b-a+1 for a,b in pairwise(cols))
-    elif not cols:
-        distance = sum(len(range) for range in ranges)
-    else:
-        cols = [range(a,b+1) for a,b in pairwise(cols)]
-        for r in ranges:
-            if any((r.start+r.stop)//2 in col for col in cols):
-                continue
-            distance += len(r)
-        distance += sum(len(range) for range in cols)
+    cols = sorted(dig[1] for dig in digs if n in dig[0] and isinstance(dig[1], int))
+    cols = [range(a,b+1) for a,b in pairwise(cols)]
+    ranges = [dig[1] for dig in digs if n==dig[0].start and isinstance(dig[1], range)]
+    distance = sum(len(range) for range in cols)
+    for r in ranges:
+        if any((r.start+r.stop)//2 in col for col in cols):
+            continue
+        distance += len(r)
     answer += distance*(n-prev)
     prev = n
 
