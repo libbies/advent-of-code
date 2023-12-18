@@ -18,7 +18,7 @@ dirs = {
     '3': 'U',
 }
 for _, _, color in lines:
-    distance = int('0x' + color[2:7],16)
+    distance = int('0x' + color[2:7], 16)
     direction = dirs[color[7]]
     if direction == "U":
         digs.append((range(row-distance, row), col))
