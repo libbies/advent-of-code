@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """advent of code 2023 day 18 part 1"""
-lines = [l.split() for l in open("input.txt").readlines()]
 from collections import defaultdict, deque
+lines = [l.split() for l in open("input.txt").readlines()]
 
 digs = defaultdict(str)
 row, col = 0, 0
