@@ -33,6 +33,7 @@ for _, _, color in lines:
         digs.append((range(row, row), range(col, col+distance)))
         col += distance
 
+# every change in rows
 rows = sorted({dig[0].start for dig in digs} | {dig[0].stop-1 for dig in digs})
 
 answer = 1 # i do not fully understand why the answer is off by one :(
@@ -43,9 +44,10 @@ for n in rows[1:]:
     distance = sum(b-a+1 for a,b in pairwise(cols))
     for r in ranges:
         if any(a<(r.start+r.stop)//2<b for a,b in pairwise(cols)):
+            # if the midpoint of a range is between cols, it is already counted
             continue
         distance += len(r)
-    answer += distance*(n-prev)
+    answer += distance*(n-prev) # n-prev == number of identical rows
     prev = n
 
 print("aoc 2023 day 18 part 2:", answer)
