@@ -37,8 +37,8 @@ def recurse(springs, found, pending, damaged):
 
 answer = 0
 for springs, damaged in lines:
+    springs = ('?'.join([springs] * 5)).strip('.').replace("..", '.')
     damaged = tuple(map(int, ','.join([damaged] * 5).split(',')))
-    springs = ('?'.join([springs] * 5)).replace("..", '.').strip('.')
     answer += recurse(springs, 0, damaged[0], damaged[1:])
 
 print(recurse.cache_info())
