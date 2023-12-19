@@ -35,5 +35,4 @@ def recurse(ranges, flow, cursor=0):
             )
 
 answer = recurse({k: (1, 4000) for k in "xmas"}, "in")
-
-print(answer)
+print("aoc 2023 day 19 part 2:", answer)
