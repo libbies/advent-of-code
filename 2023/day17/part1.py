@@ -31,7 +31,6 @@ while queue:
     distance, row, col, path = heapq.heappop(queue)
     if row==maxlen-1 and col==maxlen-1:
         answer = min(answer, distance)
-    neighbors = []
     for direction, (dx, dy) in directions.items():
         if path and reverse[path[-1]]==direction:
             continue
