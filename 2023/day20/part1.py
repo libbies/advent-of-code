@@ -5,30 +5,29 @@ lines = [l.split(maxsplit=2) for l in open("input.txt").readlines()]
 
 low, high = 0, 1
 class Module(object):
+    type = None
     output = low
     inputs = {}
+    outputs = []
 
-types = defaultdict(str)
-outputs = dict()
-modules = dict()
+modules = defaultdict(Module)
 for line in lines:
     if line[0][0] in ('%', '&'):
         line[1], line[0] = line[0][0], line[0][1:]
-    types[line[0]] = line[1]
-    outputs[line[0]] = line[2].strip().split(', ')
     modules[line[0]] = Module()
+    modules[line[0]].type = line[1]
     modules[line[0]].inputs = {}
+    modules[line[0]].outputs = line[2].strip().split(', ')
 
-for module, type in types.items():
-    if type=='&':
-        for (src, outs) in outputs.items():
-            if module in outs:
-                modules[module].inputs[src] = low
+for module in modules:
+    for dst in modules[module].outputs:
+        if modules.get(dst, Module).type=='&':
+            modules[dst].inputs[module] = low
 
 def output(module):
-    if types[module]=='%':
+    if modules[module].type=='%':
         return modules[module].output
-    elif types[module]=='&':
+    elif modules[module].type=='&':
         if all(input==high for input in modules[module].inputs.values()):
             return low
         return high
@@ -43,12 +42,12 @@ for n in range(1000):
     while queue:
         module = queue.popleft()
         pulse = output(module)
-        for dst in outputs[module]:
+        for dst in modules[module].outputs:
             # print(f"{module} -{'high' if pulse else 'low'}-> {dst}")
-            if types[dst]=='%' and pulse==low:
+            if modules[dst].type=='%' and pulse==low:
                 modules[dst].output = not modules[dst].output
                 queue.append(dst)
-            if types[dst]=='&':
+            if modules[dst].type=='&':
                 modules[dst].inputs[module] = pulse
                 queue.append(dst)
             if pulse==high:
