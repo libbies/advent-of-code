@@ -15,9 +15,8 @@ modules = dict()
 for line in lines:
     if line[0][0] in ('%', '&'):
         line[1], line[0] = line[0][0], line[0][1:]
-    line[2] = line[2].strip().split(', ')
     types[line[0]] = line[1]
-    outputs[line[0]] = deque(line[2])
+    outputs[line[0]] = line[2].strip().split(', ')
     modules[line[0]] = Module()
     modules[line[0]].inputs = {}
 
@@ -39,18 +38,17 @@ def output(module):
 targets = defaultdict(list)
 queue = deque()
 n = 0
-while not (len(targets) and all(len(target)==2 for target in targets.values())):
+while not (targets and all(len(target)==2 for target in targets.values())):
     queue.append("broadcaster")
     while queue:
         module = queue.popleft()
         pulse = output(module)
         for dst in outputs[module]:
             # hardcoded, (ln, db, vq, tf) -> &tg -> rx
-            if dst in ["ln", "db", "vq", "tf"]:
+            if dst in ("ln", "db", "vq", "tf"):
                 if output(dst)==high and n!=0:
                     targets[dst].append(n)
-            if types[dst]=='%':
-                if pulse==low:
+            if types[dst]=='%' and pulse==low:
                     modules[dst].output = not modules[dst].output
                     queue.append(dst)
             if types[dst]=='&':
