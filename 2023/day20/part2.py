@@ -44,7 +44,7 @@ while not (targets and all(len(target)==2 for target in targets.values())):
         module = queue.popleft()
         pulse = output(module)
         for dst in outputs[module]:
-            # hardcoded, (ln, db, vq, tf) -> &tg -> rx
+            # hardcoded for my input, (ln, db, vq, tf) -> &tg -> rx
             if dst in ("ln", "db", "vq", "tf"):
                 if output(dst)==high and n!=0:
                     targets[dst].append(n)
