@@ -11,8 +11,8 @@ for line in lines[0].splitlines():
         if ':' in flow:
             flows[name].append((
                 flow[0], flow[1], int(flow[2:].split(':')[0]),
-                flow[2:].split(':')[-1])
-            )
+                flow[2:].split(':')[-1]
+            ))
         else:
             flows[name].append((None, None, None, flow))
 
