@@ -35,10 +35,10 @@ def output(module):
         return high
     return low
 
-targets = defaultdict(list)
+targets = dict()
 queue = deque()
-n = 0
-while not (targets and all(len(target)==2 for target in targets.values())):
+n = 1
+while len(targets)!=4:
     queue.append("broadcaster")
     while queue:
         module = queue.popleft()
@@ -46,15 +46,15 @@ while not (targets and all(len(target)==2 for target in targets.values())):
         for dst in outputs[module]:
             # hardcoded for my input, (ln, db, vq, tf) -> &tg -> rx
             if dst in ("ln", "db", "vq", "tf"):
-                if output(dst)==high and n!=0:
-                    targets[dst].append(n)
+                if output(dst)==high and n!=1:
+                    targets[dst] = n
             if types[dst]=='%' and pulse==low:
-                    modules[dst].output = not modules[dst].output
-                    queue.append(dst)
+                modules[dst].output = not modules[dst].output
+                queue.append(dst)
             if types[dst]=='&':
                 modules[dst].inputs[module] = pulse
                 queue.append(dst)
     n += 1
 
-answer = lcm(*(b-a for a,b in targets.values()))
+answer = lcm(*(target for target in targets.values()))
 print("aoc 2023 day 20 part 2:", answer)
