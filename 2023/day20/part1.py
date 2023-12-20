@@ -4,11 +4,11 @@ from collections import deque, defaultdict
 lines = [l.split(maxsplit=2) for l in open("input.txt").readlines()]
 
 low, high = 0, 1
-class Module(object):
+class Module():
     type = None
     output = low
-    inputs = {}
-    outputs = []
+    inputs = dict()
+    outputs = list()
 
 modules = defaultdict(Module)
 for line in lines:
@@ -27,7 +27,7 @@ for module in modules:
 def output(module):
     if modules[module].type=='%':
         return modules[module].output
-    elif modules[module].type=='&':
+    if modules[module].type=='&':
         if all(input==high for input in modules[module].inputs.values()):
             return low
         return high
