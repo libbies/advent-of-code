@@ -33,7 +33,7 @@ while len(counts)!=3:
     n += 1
 
 differences = [a-b for a,b in pairwise(counts[::-1])]
-cycle = differences[0] - differences[-1]
+cycle = next(a-b for a,b in pairwise(differences))
 
 answer = steps
 diff = differences[0]
