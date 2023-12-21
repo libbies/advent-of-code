@@ -1,14 +1,10 @@
 #!/usr/bin/env python
 """advent of code 2023 day 21 part 2"""
 from collections import deque
-from collections import defaultdict
 from itertools import pairwise
 lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
 maxlen = len(lines)
-
-steps = defaultdict(lambda:0)
-
 for row, line in enumerate(lines):
     if 'S' not in line:
         continue
@@ -38,13 +34,14 @@ while len(counts)!=3:
     n += 1
 
 differences = [a-b for a,b in pairwise(counts[::-1])]
-cycle = [a-b for a,b in pairwise(differences)][0]
+cycle = [a-b for a,b in pairwise(differences)]
+assert cycle.count(cycle[-1])==len(cycle)
 
 answer = steps
 diff = differences[0]
-while n<=goal:
+while n<goal:
     n += maxlen * 2
-    diff += cycle
+    diff += cycle[0]
     answer += diff
 
 print("aoc 2023 day 21 part 2:", answer)

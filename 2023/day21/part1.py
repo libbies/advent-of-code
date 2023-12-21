@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """advent of code 2023 day 21 part 1"""
-from collections import deque
 lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
 maxlen = len(lines)
@@ -16,7 +15,7 @@ for row, line in enumerate(lines):
 queue = [start]
 goal = 64
 for n in range(goal):
-    tmp = list()
+    tmp = []
     for (row, col) in queue:
         for dx, dy in ((0, 1), (1,0), (-1,0), (0,-1)):
             if not (0<=row+dx<maxlen and 0<=col+dy<maxlen):
@@ -30,5 +29,4 @@ for n in range(goal):
     queue = tmp
 
 answer = sum(sum(1 for step in row if step and step%2==0) for row in steps)
-
 print("aoc 2023 day 21 part 1:", answer)
