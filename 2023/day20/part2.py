@@ -55,5 +55,5 @@ while len(targets)!=4:
                 queue.append(dst)
     n += 1
 
-answer = lcm(*(target for target in targets.values()))
+answer = lcm(*targets.values())
 print("aoc 2023 day 20 part 2:", answer)
