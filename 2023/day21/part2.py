@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 """advent of code 2023 day 21 part 2"""
-from collections import deque
 from itertools import pairwise
 lines = [list(l.strip()) for l in open("input.txt").readlines()]
 
@@ -17,7 +16,7 @@ counts = list()
 n, steps = 0, 0
 visited = set()
 while len(counts)!=3:
-    tmp = deque()
+    tmp = []
     for (row, col) in queue:
         for dx, dy in ((0, 1), (1,0), (-1,0), (0,-1)):
             if lines[(row+dx)%maxlen][(col+dy)%maxlen] == '#':
@@ -34,14 +33,13 @@ while len(counts)!=3:
     n += 1
 
 differences = [a-b for a,b in pairwise(counts[::-1])]
-cycle = [a-b for a,b in pairwise(differences)]
-assert cycle.count(cycle[-1])==len(cycle)
+cycle = differences[0] - differences[-1]
 
 answer = steps
 diff = differences[0]
 while n<goal:
     n += maxlen * 2
-    diff += cycle[0]
+    diff += cycle
     answer += diff
 
 print("aoc 2023 day 21 part 2:", answer)
