@@ -30,8 +30,8 @@ for start in starts:
                 case '\\':
                     queue.append((row, n, 'D' if direction=='R' else 'U'))
                 case '|':
-                    queue.append((row, n, 'U' if direction=='R' else 'D'))
-                    queue.append((row, n, 'D' if direction=='R' else 'U'))
+                    queue.append((row, n, 'U'))
+                    queue.append((row, n, 'D'))
                 case _:
                     queue.append((row, n, 'R' if direction=='R' else 'L'))
         elif (direction=='D' and row+1<maxlen) or (direction=='U' and row-1>=0):
@@ -43,8 +43,8 @@ for start in starts:
                 case '\\':
                     queue.append((n, col, 'R' if direction=='D' else 'L'))
                 case '-':
-                    queue.append((n, col, 'L' if direction=='D' else 'R'))
-                    queue.append((n, col, 'R' if direction=='D' else 'L'))
+                    queue.append((n, col, 'L'))
+                    queue.append((n, col, 'R'))
                 case _:
                     queue.append((n, col, 'D' if direction=='D' else 'U'))
     answer = max(answer, sum(sum(row) for row in visited))
