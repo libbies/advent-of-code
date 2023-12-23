@@ -27,22 +27,21 @@ for row, line in enumerate(grid):
 graph = defaultdict(set)
 queue = deque()
 for node in nodes:
-    for row, col in ((node[0]+dx,node[-1]+dy) for dx,dy in directions.values()):
-        if not (0<row<length and 0<col<length) or grid[row][col]=='#':
+    visited = {node}
+    queue.append((*node, 0))
+    while queue:
+        row, col, step = queue.pop()
+        if (row,col) in nodes and (row,col)!=node:
+            graph[node].add((row, col, step))
+            graph[(row,col)].add((*node, step))
             continue
-        visited = [node]
-        queue.append((row, col, 1))
-        while queue:
-            row, col, step = queue.pop()
-            if (row,col) in nodes:
-                graph[node].add((row,col, step))
-                graph[(row,col)].add((*node, step))
-                break
-            for dx,dy in directions.values():
-                if grid[row+dx][col+dy]=='#' or (row+dx,col+dy) in visited:
-                    continue
-                visited.append((row+dx,col+dy))
-                queue.append((row+dx,col+dy, step+1))
+        for dx,dy in directions.values():
+            if not (0<row+dx<length and 0<col+dy<length):
+                continue
+            if grid[row+dx][col+dy]=='#' or (row+dx,col+dy) in visited:
+                continue
+            visited.add((row+dx,col+dy))
+            queue.append((row+dx, col+dy, step+1))
 
 def dfs(graph, start, end, visited=set(), distance=0, answer=0):
     visited.add(start)
@@ -56,4 +55,4 @@ def dfs(graph, start, end, visited=set(), distance=0, answer=0):
     return answer
 
 answer = dfs(graph, start, end)
-print(answer)
+print("aoc 2023 day 23 part 2:", answer)
