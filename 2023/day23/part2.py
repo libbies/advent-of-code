@@ -30,17 +30,17 @@ for node in nodes:
     visited = {node}
     queue.append((*node, 0))
     while queue:
-        row, col, step = queue.pop()
+        row, col, step = queue.popleft()
         if (row,col) in nodes and (row,col)!=node:
             graph[node].add((row, col, step))
             graph[(row,col)].add((*node, step))
             continue
+        if not (0<row<length-1 and 0<col<length-1):
+            continue
         for dx,dy in directions.values():
-            if not (0<row+dx<length and 0<col+dy<length):
-                continue
             if grid[row+dx][col+dy]=='#' or (row+dx,col+dy) in visited:
                 continue
-            visited.add((row+dx,col+dy))
+            visited.add((row+dx, col+dy))
             queue.append((row+dx, col+dy, step+1))
 
 def dfs(graph, start, end, visited=set(), distance=0, answer=0):
