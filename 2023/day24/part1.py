@@ -5,8 +5,8 @@ from itertools import combinations
 from sympy import Point, Segment
 hail = [[int(_) for _ in re.split(r"[^0-9-]+", l.strip())] for l in open("input.txt").readlines()]
 
-minbound = 200000000000000
-maxbound = 400000000000000
+minbound = 200_000_000_000_000
+maxbound = 400_000_000_000_000
 lines = list()
 for px, py, pz, vx, vy, vz in hail:
     lines.append(Segment(Point(px, py), Point(px+(vx*maxbound), py+(vy*maxbound))))
