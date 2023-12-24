@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 """advent of code 2023 day 24 part 2"""
 import re
-from z3 import *
+from z3 import Int, Ints, Solver, sat
 hail = [[int(_) for _ in re.split(r"[^0-9-]+", l.strip())] for l in open("input.txt").readlines()]
 
 Px, Py, Pz = Ints('Px Py Pz')
