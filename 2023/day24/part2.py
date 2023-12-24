@@ -9,7 +9,7 @@ Vx, Vy, Vz = Ints('Vx Vy Vz')
 
 solver = Solver()
 for i, (px, py, pz, vx, vy, vz) in enumerate(hail[:3]):
-    t_i = Int(f't_{i}')
+    t_i = Int(f"t_{i}")
     solver.add(Px + t_i * Vx == px + t_i * vx)
     solver.add(Py + t_i * Vy == py + t_i * vy)
     solver.add(Pz + t_i * Vz == pz + t_i * vz)
