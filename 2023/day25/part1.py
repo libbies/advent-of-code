@@ -1,12 +1,9 @@
-from collections import defaultdict
 from igraph import Graph
 lines = [l.strip().split(': ') for l in open("input.txt").readlines()]
 
-graph = defaultdict(list)
+graph = dict()
 for node, adjacent in lines:
-    for adj in adjacent.split():
-        graph[node].append(adj)
-        graph[adj].append(node)
+    graph[node] = adjacent.split()
 
 graph = Graph.ListDict(graph)
 s1, s2 = Graph.mincut(graph).sizes()
