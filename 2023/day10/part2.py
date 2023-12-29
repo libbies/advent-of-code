@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""advent of code 2023 day 10 part 2n"""
+"""advent of code 2023 day 10 part 2"""
 from collections import deque
 lines = open("input.txt").readlines()
 
