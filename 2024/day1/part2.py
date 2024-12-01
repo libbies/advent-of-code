@@ -10,5 +10,4 @@ answer = 0
 for left in lefts:
     answer += left * rights.count(left)
 
-
 print("aoc 2024 day 1 part 2:", answer)
