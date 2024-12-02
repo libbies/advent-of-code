@@ -17,9 +17,9 @@ for report in reports:
             answer += 1
         elif levels[i+1] == level:
             break
-        elif increasing and (0 <= levels[i+1] - level > 3):
+        elif increasing and levels[i+1]-level > 3:
             break
-        elif not increasing and (0 <= level - levels[i+1] > 3):
+        elif not increasing and level-levels[i+1] > 3:
             break
 
 print("aoc 2024 day 2 part 1:", answer)
