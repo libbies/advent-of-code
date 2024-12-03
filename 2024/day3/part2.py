@@ -6,7 +6,7 @@ lines = open("input.txt").read().splitlines()
 answer = 0
 enabled = True
 for line in lines:
-    for m in re.findall(r"(do\(\)|don\'t\(\)|mul\([0-9]+,[0-9]+\))", line):
+    for m in re.findall(r"(do\(\)|don't\(\)|mul\([0-9]+,[0-9]+\))", line):
         if m == "do()":
             enabled = True
         elif m == "don't()":
