@@ -12,15 +12,10 @@ for x, line in enumerate(lines):
 answer = 0
 for x in range(width):
     for y in range(width):
-        if grid[x,y]=="M" and grid[x+1,y+1]=="A" and grid[x+2,y+2]=="S":
-            if grid[x+2,y]=="M" and grid[x,y+2]=="S":
-                answer += 1
-            if grid[x+2,y]=="S" and grid[x,y+2]=="M":
-                answer += 1
-        if grid[x,y]=="S" and grid[x+1,y+1]=="A" and grid[x+2,y+2]=="M":
-            if grid[x+2,y]=="M" and grid[x,y+2]=="S":
-                answer += 1
-            if grid[x+2,y]=="S" and grid[x,y+2]=="M":
+        if grid[x+1,y+1]=="A" and ((grid[x,y]=="M" and grid[x+2,y+2]=="S")
+                                or (grid[x,y]=="S" and grid[x+2,y+2]=="M")):
+            if ((grid[x+2,y]=="M" and grid[x,y+2]=="S") or
+                (grid[x+2,y]=="S" and grid[x,y+2]=="M")):
                 answer += 1
 
 print("aoc 2024 day 4 part 2:", answer)
