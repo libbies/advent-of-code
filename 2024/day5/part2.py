@@ -32,7 +32,7 @@ for update in incorrect:
                 if page==rule[1]:
                     break
             else:
-                sorted += [page]
+                sorted += [ page ]
                 update.remove(page)
                 applicable = [ rule for rule in applicable if page!=rule[0] ]
     answer += sorted[len(sorted)//2]
