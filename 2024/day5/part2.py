@@ -29,7 +29,7 @@ for update in incorrect:
     while update:
         for page in update:
             for rule in applicable:
-                if page==rule[1]:
+                if page == rule[1]:
                     break
             else:
                 sorted += [ page ]
