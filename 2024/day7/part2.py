@@ -9,7 +9,8 @@ for line in open("input.txt").read().splitlines():
     results = [values.pop(0)]
     while values:
         n = values.pop(0)
-        results = [ v*n for v in results] + [v+n for v in results] \
+        results = [v*n for v in results if v*n<=test] \
+            + [v+n for v in results if v+n<=test] \
             + [int(str(v)+str(n)) for v in results]
     if test in results:
         answer += test
