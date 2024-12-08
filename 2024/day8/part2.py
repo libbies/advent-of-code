@@ -16,17 +16,17 @@ for x, line in enumerate(lines):
 nodes = set()
 for char in frequencies:
     for (x1,y1), (x2,y2) in combinations(frequencies[char], 2):
-        nodes.add((x1,y1))
-        nodes.add((x2,y2))
-        dx, dy = x1-x2, y1-y2
-        step = 1
-        while 0<=x1+dx*step<height and 0<=y1+dy*step<width:
-            nodes.add((x1+dx*step, y1+dy*step))
-            step += 1
-        step = 1
-        while 0<=x2-dx*step<height and 0<=y2-dy*step<width:
-            nodes.add((x2-dx*step, y2-dy*step))
-            step += 1
+        dx, dy = x2-x1, y2-y1
+        for step in range(height):
+            if 0<=x1-dx*step<height and 0<=y1-dy*step<width:
+                nodes.add((x1-dx*step, y1-dy*step))
+            else:
+                break
+        for step in range(height):
+            if 0<=x2+dx*step<height and 0<=y2+dy*step<width:
+                nodes.add((x2+dx*step, y2+dy*step))
+            else:
+                break
 
 answer = len(nodes)
 print("aoc 2024 day 8 part 2:", answer)
