@@ -2,14 +2,13 @@
 """advent of code 2024 day 9 part 2"""
 
 diskmap = open("input.txt").read().strip()
-blocks = iter(diskmap[i:i+2] for i in range(0, len(diskmap), 2))
 
 cursor = 0
 file_id = 0
 disk = dict()
 files = dict()
 free = list()
-for block in blocks:
+for block in (diskmap[i:i+2] for i in range(0, len(diskmap), 2)):
     size = int(block[0])
     for n in range(size):
         disk[cursor+n] = file_id
