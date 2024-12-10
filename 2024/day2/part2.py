@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """advent of code 2024 day 2 part 2"""
 
-reports = [_.split() for _ in open("input.txt").read().splitlines()]
-
 def check_safety(levels):
     if levels == sorted(levels):
         increasing = True
@@ -21,7 +19,7 @@ def check_safety(levels):
             return False
 
 answer = 0
-for report in reports:
+for report in (_.split() for _ in open("input.txt").read().splitlines()):
     levels = [int(l) for l in report]
     if check_safety(levels):
         answer += 1
