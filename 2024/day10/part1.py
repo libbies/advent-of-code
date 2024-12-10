@@ -11,12 +11,12 @@ for x, line in enumerate(open("input.txt").read().splitlines()):
             queue.add(((x,y), x, y))
 
 for n in range(1, 10):
-    tmp = set()
-    for head, x, y in queue:
-        for dx,dy in ((1,0),(-1,0),(0,1),(0,-1)):
-            if topograph[x+dx, y+dy]==n:
-                tmp.add((head, x+dx, y+dy))
-    queue = tmp
+    queue = {
+        (head, x+dx, y+dy)
+        for head, x, y in queue
+        for dx,dy in ((1,0),(-1,0),(0,1),(0,-1))
+        if topograph[x+dx, y+dy]==n
+    }
 
 answer = len(queue)
 print("aoc 2024 day 10 part 1:", answer)
