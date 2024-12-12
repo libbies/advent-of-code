@@ -8,7 +8,7 @@ def count(stones, depth):
         total = 0
         for stone in stones:
             if stone==0:
-                total += count((1,), depth-1)
+                total += count((2024,), depth-2)
             elif len(s := str(stone))%2==0:
                 total += count((int(s[:len(s)//2]), int(s[len(s)//2:])), depth-1)
             else:
