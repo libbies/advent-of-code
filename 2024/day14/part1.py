@@ -14,10 +14,10 @@ for n in range(100):
         robot[0] = (robot[0]+robot[2])%width
         robot[1] = (robot[1]+robot[3])%height
 
-q0 = sum(1 for x,y,_,_ in robots if x<width//2 and y<height//2)
-q1 = sum(1 for x,y,_,_ in robots if width//2<x and y<height//2)
-q2 = sum(1 for x,y,_,_ in robots if x<width//2 and height//2<y)
-q3 = sum(1 for x,y,_,_ in robots if width//2<x and height//2<y)
+q0 = sum(1 for x,y,_,_ in robots if x<width//2   and y<height//2  )
+q1 = sum(1 for x,y,_,_ in robots if   width//2<x and y<height//2  )
+q2 = sum(1 for x,y,_,_ in robots if x<width//2   and   height//2<y)
+q3 = sum(1 for x,y,_,_ in robots if   width//2<x and   height//2<y)
 
 answer = q0*q1*q2*q3
 print("aoc 2024 day 14 part 1:", answer)
