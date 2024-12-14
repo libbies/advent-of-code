@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""advent of code 2024 day 14 part 1"""
+"""advent of code 2024 day 14 part 2"""
 import re
 
 lines = open("input.txt").read().splitlines()
