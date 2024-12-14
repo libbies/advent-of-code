@@ -16,12 +16,12 @@ def pprint():
             print('█' if count else ' ', end="")
         print()
 
-for answer in range(height*width):
-    if len({(x,y) for x,y,_,_ in robots})==len(robots):
-        pprint()
-        break
+for answer in range(1, height*width):
     for robot in robots:
         robot[0] = (robot[0]+robot[2])%width
         robot[1] = (robot[1]+robot[3])%height
+    if len({(x,y) for x,y,_,_ in robots})==len(robots):
+        pprint()
+        break
 
 print("aoc 2024 day 14 part 2:", answer)
