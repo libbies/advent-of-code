@@ -43,9 +43,8 @@ for move in lines[1].strip():
             for n in range(1, width):
                 if (x,y+n) in bounds:
                     break
-                if not warehouse[x,y+1+n]:
-                    location = x,y+1
-                    warehouse[location] = None
+                if not warehouse[x,y+n+1]:
+                    warehouse[location := (x,y+1)] = None
                     warehouse[x,y+1+n] = 'O'
                     break
     if move=='<':
@@ -55,10 +54,9 @@ for move in lines[1].strip():
             for n in range(1, width):
                 if (x,y-n) in bounds:
                     break
-                if not warehouse[x,y-1-n]:
-                    location = x,y-1
-                    warehouse[location] = None
-                    warehouse[x,y-1-n] = 'O'
+                if not warehouse[x,y-n-1]:
+                    warehouse[location := (x,y-1)] = None
+                    warehouse[x,y-n-1] = 'O'
                     break
     if move=='v':
         if not warehouse[x+1,y]:
@@ -67,10 +65,9 @@ for move in lines[1].strip():
             for n in range(1, height):
                 if (x+n,y) in bounds:
                     break
-                if not warehouse[x+1+n,y]:
-                    location = x+1,y
-                    warehouse[location] = None
-                    warehouse[x+1+n,y] = 'O'
+                if not warehouse[x+n+1,y]:
+                    warehouse[location := (x+1,y)] = None
+                    warehouse[x+n+1,y] = 'O'
                     break
     if move=='^':
         if not warehouse[x-1,y]:
@@ -79,16 +76,14 @@ for move in lines[1].strip():
             for n in range(1, height):
                 if (x-n,y) in bounds:
                     break
-                if not warehouse[x-1-n,y]:
-                    location = x-1,y
-                    warehouse[location] = None
-                    warehouse[x-1-n,y] = 'O'
+                if not warehouse[x-n-1,y]:
+                    warehouse[location := (x-1,y)] = None
+                    warehouse[x-n-1,y] = 'O'
                     break
 
 pprint()
 answer = 0
 for x, y in {k for k in warehouse if warehouse[k]=='O'}:
-    score = 100 * x + y
-    answer += score
+    answer += 100 * x + y
 
 print("aoc 2024 day 15 part 1:", answer)
