@@ -36,49 +36,29 @@ for x, line in enumerate(lines[0].split()):
 
 for move in lines[1].strip():
     x, y = location
-    if move=='>':
-        if not warehouse[x,y+1]:
-            location = x,y+1
-        elif warehouse[x,y+1]=='O':
+    if move in "><":
+        d = 1 if move=='>' else -1
+        if not warehouse[x,y+d]:
+            location = x,y+d
+        elif warehouse[x,y+d]=='O':
             for n in range(1, width):
-                if (x,y+n) in bounds:
+                if (x,y+n*d) in bounds:
                     break
-                if not warehouse[x,y+n+1]:
-                    warehouse[location := (x,y+1)] = None
-                    warehouse[x,y+1+n] = 'O'
+                if not warehouse[x,y+d+n*d]:
+                    warehouse[x,y+d+n*d] = 'O'
+                    warehouse[location := (x,y+d)] = None
                     break
-    if move=='<':
-        if not warehouse[x,y-1]:
-            location = x,y-1
-        elif warehouse[x,y-1]=='O':
-            for n in range(1, width):
-                if (x,y-n) in bounds:
-                    break
-                if not warehouse[x,y-n-1]:
-                    warehouse[location := (x,y-1)] = None
-                    warehouse[x,y-n-1] = 'O'
-                    break
-    if move=='v':
-        if not warehouse[x+1,y]:
-            location = x+1,y
-        if warehouse[x+1,y]=='O':
+    if move in "^v":
+        d = 1 if move=='v' else -1
+        if not warehouse[x+d,y]:
+            location = x+d,y
+        if warehouse[x+d,y]=='O':
             for n in range(1, height):
-                if (x+n,y) in bounds:
+                if (x+n*d,y) in bounds:
                     break
-                if not warehouse[x+n+1,y]:
-                    warehouse[location := (x+1,y)] = None
-                    warehouse[x+n+1,y] = 'O'
-                    break
-    if move=='^':
-        if not warehouse[x-1,y]:
-            location = x-1,y
-        if warehouse[x-1,y]=='O':
-            for n in range(1, height):
-                if (x-n,y) in bounds:
-                    break
-                if not warehouse[x-n-1,y]:
-                    warehouse[location := (x-1,y)] = None
-                    warehouse[x-n-1,y] = 'O'
+                if not warehouse[x+d+n*d,y]:
+                    warehouse[x+d+n*d,y] = 'O'
+                    warehouse[location := (x+d,y)] = None
                     break
 
 pprint()

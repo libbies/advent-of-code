@@ -50,9 +50,9 @@ for move in lines[1].strip():
                 if (x,y+n) in bounds:
                     break
                 if not warehouse[x,y+n+1]:
-                    warehouse[location := (x,y+1)] = None
                     for m in range(1, n+1):
                         warehouse[x,y+m+1] = '[' if m%2==1 else ']'
+                    warehouse[location := (x,y+1)] = None
                     break
     if move=='<':
         if not warehouse[x,y-1]:
@@ -62,60 +62,39 @@ for move in lines[1].strip():
                 if (x,y-n) in bounds:
                     break
                 if not warehouse[x,y-1-n]:
-                    warehouse[location := (x,y-1)] = None
                     for m in range(1, n+1):
                         warehouse[x,y-1-m] = ']' if m%2==1 else '['
+                    warehouse[location := (x,y-1)] = None
                     break
-    if move=='v':
-        if not warehouse[x+1,y]:
-            location = x+1,y
-        elif warehouse[x+1,y] in "[]":
-            if warehouse[x+1,y] == '[':
-                boulders = [(x+1,y), (x+1,y+1)]
-            if warehouse[x+1,y] == ']':
-                boulders = [(x+1,y), (x+1,y-1)]
+    if move in "^v":
+        d = 1 if move=='v' else -1
+        if not warehouse[x+d,y]:
+            location = x+d,y
+        elif warehouse[x+d,y] in "[]":
+            if warehouse[x+d,y] == '[':
+                boulders = [(x+d,y), (x+d,y+1)]
+            if warehouse[x+d,y] == ']':
+                boulders = [(x+d,y), (x+d,y-1)]
             queue = boulders.copy()
             while queue:
                 bx, by = queue.pop()
-                if (bx+1,by) in bounds:
+                if (bx+d,by) in bounds:
                     break
-                if warehouse[bx+1,by] == '[':
-                    queue += [(bx+1,by), (bx+1,by+1)]
+                if warehouse[bx+d,by] == '[':
+                    queue += [(bx+d,by), (bx+d,by+1)]
                     boulders += queue[-2:]
-                elif warehouse[bx+1,by] == ']':
-                    queue += [(bx+1,by), (bx+1,by-1)]
+                elif warehouse[bx+d,by] == ']':
+                    queue += [(bx+d,by), (bx+d,by-1)]
                     boulders += queue[-2:]
             else:
                 tmp = warehouse.copy()
-                for bx, by in reversed(sorted(boulders)):
+                boulders = sorted(boulders)
+                if move=='v':
+                    boulders = reversed(boulders)
+                for bx,by in boulders:
                     warehouse[bx,by] = None
-                    warehouse[bx+1,by] = tmp[bx,by]
-                warehouse[location := (x+1,y)] = None
-    if move=='^':
-        if not warehouse[x-1,y]:
-            location = x-1,y
-        elif warehouse[x-1,y] in "[]":
-            if warehouse[x-1,y] == '[':
-                boulders = [(x-1,y), (x-1,y+1)]
-            if warehouse[x-1,y] == ']':
-                boulders = [(x-1,y), (x-1,y-1)]
-            queue = boulders.copy()
-            while queue:
-                bx, by = queue.pop()
-                if (bx-1,by) in bounds:
-                    break
-                if warehouse[bx-1,by] == '[':
-                    queue += [(bx-1,by), (bx-1,by+1)]
-                    boulders += queue[-2:]
-                elif warehouse[bx-1,by] == ']':
-                    queue += [(bx-1,by), (bx-1,by-1)]
-                    boulders += queue[-2:]
-            else:
-                tmp = warehouse.copy()
-                for bx, by in sorted(boulders):
-                    warehouse[bx,by] = None
-                    warehouse[bx-1,by] = tmp[bx,by]
-                warehouse[location := (x-1,y)] = None
+                    warehouse[bx+d,by] = tmp[bx,by]
+                warehouse[location := (x+d,y)] = None
 
 pprint()
 answer = 0
