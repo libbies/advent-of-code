@@ -51,8 +51,8 @@ for move in lines[1].strip():
                     break
                 if not warehouse[x,y+n+1]:
                     warehouse[location := (x,y+1)] = None
-                    for o in range(1, n+1):
-                        warehouse[x,y+o+1] = '[' if o%2==1 else ']'
+                    for m in range(1, n+1):
+                        warehouse[x,y+m+1] = '[' if m%2==1 else ']'
                     break
     if move=='<':
         if not warehouse[x,y-1]:
@@ -63,8 +63,8 @@ for move in lines[1].strip():
                     break
                 if not warehouse[x,y-1-n]:
                     warehouse[location := (x,y-1)] = None
-                    for o in range(1, n+1):
-                        warehouse[x,y-1-o] = ']' if o%2==1 else '['
+                    for m in range(1, n+1):
+                        warehouse[x,y-1-m] = ']' if m%2==1 else '['
                     break
     if move=='v':
         if not warehouse[x+1,y]:
