@@ -50,8 +50,7 @@ for move in lines[1].strip():
                 if (x,y+n) in bounds:
                     break
                 if not warehouse[x,y+n+1]:
-                    location = x,y+1
-                    warehouse[location] = None
+                    warehouse[location := (x,y+1)] = None
                     for o in range(1, n+1):
                         warehouse[x,y+o+1] = '[' if o%2==1 else ']'
                     break
@@ -63,8 +62,7 @@ for move in lines[1].strip():
                 if (x,y-n) in bounds:
                     break
                 if not warehouse[x,y-1-n]:
-                    location = x,y-1
-                    warehouse[location] = None
+                    warehouse[location := (x,y-1)] = None
                     for o in range(1, n+1):
                         warehouse[x,y-1-o] = ']' if o%2==1 else '['
                     break
@@ -78,19 +76,15 @@ for move in lines[1].strip():
                 boulders = [(x+1,y), (x+1,y-1)]
             queue = boulders.copy()
             while queue:
-                tmp = []
-                for bx, by in queue:
-                    if (bx+1,by) in bounds:
-                        break
-                    if warehouse[bx+1,by] == '[':
-                        tmp += [(bx+1,by), (bx+1,by+1)]
-                    elif warehouse[bx+1,by] == ']':
-                        tmp += [(bx+1,by), (bx+1,by-1)]
-                else:
-                    boulders += tmp
-                    queue = tmp
-                    continue
-                break
+                bx, by = queue.pop()
+                if (bx+1,by) in bounds:
+                    break
+                if warehouse[bx+1,by] == '[':
+                    queue += [(bx+1,by), (bx+1,by+1)]
+                    boulders += queue[-2:]
+                elif warehouse[bx+1,by] == ']':
+                    queue += [(bx+1,by), (bx+1,by-1)]
+                    boulders += queue[-2:]
             else:
                 tmp = warehouse.copy()
                 for bx, by in reversed(sorted(boulders)):
@@ -107,19 +101,15 @@ for move in lines[1].strip():
                 boulders = [(x-1,y), (x-1,y-1)]
             queue = boulders.copy()
             while queue:
-                tmp = []
-                for bx, by in queue:
-                    if (bx-1,by) in bounds:
-                        break
-                    if warehouse[bx-1,by] == '[':
-                        tmp += [(bx-1,by), (bx-1,by+1)]
-                    elif warehouse[bx-1,by] == ']':
-                        tmp += [(bx-1,by), (bx-1,by-1)]
-                else:
-                    boulders += tmp
-                    queue = tmp
-                    continue
-                break
+                bx, by = queue.pop()
+                if (bx-1,by) in bounds:
+                    break
+                if warehouse[bx-1,by] == '[':
+                    queue += [(bx-1,by), (bx-1,by+1)]
+                    boulders += queue[-2:]
+                elif warehouse[bx-1,by] == ']':
+                    queue += [(bx-1,by), (bx-1,by-1)]
+                    boulders += queue[-2:]
             else:
                 tmp = warehouse.copy()
                 for bx, by in sorted(boulders):
@@ -130,7 +120,6 @@ for move in lines[1].strip():
 pprint()
 answer = 0
 for x, y in {k for k in warehouse if warehouse[k]=='['}:
-    score = 100 * x + y
-    answer += score
+    answer += 100 * x + y
 
 print("aoc 2024 day 15 part 2:", answer)
